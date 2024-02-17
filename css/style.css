@@ -19,6 +19,16 @@ header .logo span {
     color: #424a55;
 }
 
+/*Scrollbar CSS*/
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #ea1f33;
+}
+
 /* header start*/
 #header {
     display: flex;
@@ -181,6 +191,7 @@ header .logo span {
     background-position: calc(100% - 50px) center
 }
 
+
 #hero h2 {
     font-size: 70px;
     color: #171512;
@@ -189,4 +200,41 @@ header .logo span {
 #hero h1 {
     font-size: 85px;
     color: #bf362a;
+}
+
+#hero .right {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#hero .right img {
+    width: 100%;
+}
+
+#hero .left {
+    width: 40%;
+}
+#hero .left h1 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+#hero .left h1 span {
+    color: #ea1f33;
+}
+#hero .left p {
+    margin-bottom: 30px;
+    color: #999;
+    font-size: 13px;
+}
+
+#hero .left button {
+    background-color: #ea1f33;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    transition: 0.5s;
+}
+#hero .left button:hover {
+    background-color: #000;
 }
