@@ -1,0 +1,29 @@
+/* login */
+#navbar li a#login:hover, 
+#navbar li a#login.active
+{
+    color: #9b9b9b ;
+}
+
+#navbar li a#login:hover::after,
+#navbar li a#login.active::after{
+    content: "" ;
+    width: 30%;
+    height: 3.5px;
+    background: #9b9b9b;
+    position: absolute;
+    bottom: -4px;
+    left: 80px;
+}
+
+.login-form{
+    border-radius: 10px;
+    border: 0.2vw solid #231f20; /* Ajoute un contour de 2px gris */
+    width: 50%;
+    margin-top: 2vw;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgb(255, 219, 219)
+}
+
