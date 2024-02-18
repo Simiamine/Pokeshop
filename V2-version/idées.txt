@@ -1,0 +1,2 @@
+-changer la couleur du titre + theme de la page en fonction du type du pokemon
+-mettre le titre dans une pokeball pour la page active
