@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
     if ($user && password_verify($mdp, $user['mdp'])) {
         // Connexion réussie
         $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['prenom']; // ou 'nom', selon ce que vous préférez afficher
+        $_SESSION['user_name'] = $user['prenom']; 
         $_SESSION['user_statut'] = $user['statut']; // Stockez le statut de l'utilisateur dans la session
         header('Location: ../index.php');
         exit();
