@@ -37,7 +37,7 @@
           <li>Compte_Admin </li>
         <li><a class="active" href="index.html" id="menu">Menu</a></li>
         <li><a href="#" id="type">Analyse</a></li>
-        <li><a href="#" id="abonnement">Liste des Pokemons</a></li>
+        <li><a href="php/ajout_pok.php" id="abonnement"> Pokemons</a></li>
         <li><a href="#" id="contact">Commandes</a></li>
         <li><a href="php/deconnexion.php" id="deconnexion">Déconnexion</a></li>
 
