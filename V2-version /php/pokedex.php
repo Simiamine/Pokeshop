@@ -24,6 +24,7 @@
         <li>Bonjour, <?= htmlspecialchars($_SESSION['user_name']); ?></li>
         <li><a  href="../index.php" id="menu">Menu</a></li>
         <li><a  class="active" href="php/pokedex.php" id="type">Pokedex</a></li>
+        <li><a href="#" id="enchere"> Enchere </a></li>
         <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
         <li><a  href="contact.php" id="contact">Contact</a></li>
         <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>

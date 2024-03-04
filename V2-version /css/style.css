@@ -229,7 +229,7 @@ header .logo span {
 }
 
 #hero .left button {
-    background-color: #ea1f33;
+    background-color: #af8a8d;
     padding: 10px 20px;
     font-size: 14px;
     color: #fff;
@@ -237,4 +237,40 @@ header .logo span {
 }
 #hero .left button:hover {
     background-color: #000;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    #navbar li {
+        padding: 0 20px; /* Réduire l'espacement pour les écrans plus petits */
+    }
+
+    #header {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    /* Ajuster la taille de la police pour les petits écrans */
+    #navbar li a {
+        font-size: 14px;
+    }
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+#header {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur les petits écrans */
+}
+
+body {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 2.5rem; /* 40px si la taille de la police du body est de 16px */
 }
