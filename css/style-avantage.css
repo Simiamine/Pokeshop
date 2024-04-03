@@ -1,7 +1,7 @@
-  
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
   body {
     background-color: #f4f4f4; /* Couleur de fond grise */
-    font-family: 'Arial', sans-serif; /* Police d'écriture */
+    font-family: 'quicksand',Arial, Helvetica, sans-serif;
   }
   
   /* Style pour le titre "Le programme de fidélité" */

@@ -28,4 +28,7 @@
       <li><a href="login.php" id="connexion">Connexion</a></li>
       <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li>
         </ul>
-
+</section>
+</body>
+<?php include_once('../include/footer.php'); ?>
+</html>

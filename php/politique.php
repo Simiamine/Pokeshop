@@ -1,8 +1,8 @@
 <?php 
-    session_start();
-    if(!isset($_SESSION['user']) || $_SESSION['statut'] != "client"){
-        header('Location: ../../index.php');
-    }
+    // session_start();
+    // if(!isset($_SESSION['user']) || $_SESSION['statut'] != "client"){
+    //     header('Location: ../../index.php');
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -175,4 +175,5 @@
         </div>
     </div>
 </body>
+<?php include_once('include/footer.php'); ?>
 </html>
