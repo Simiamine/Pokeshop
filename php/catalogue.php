@@ -7,10 +7,17 @@
     <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/pokedex.js"></script>
+    <script src="../js/catalogue.js"></script>
     <title>Pokedex</title>
     <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
+     <!-- j'ai modifié -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
 
    
     
@@ -32,8 +39,7 @@
         <li><a href="#" id="type">Pokedex</a></li>
         <li><a href="#" id="compte">Compte</a></li>
         <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
-        <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
-        </ul>
+        <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li>
 
         <?php else: ?>
             <ul id="navbar">
@@ -42,7 +48,7 @@
       <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
       <li><a  href="contact.php" id="contact">Contact</a></li>
       <li><a href="login.php" id="connexion">Connexion</a></li>
-      <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+      <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li>
         </ul>
 <?php endif; ?>
 </section>
@@ -82,6 +88,7 @@ foreach ($requete as $pokemon) {
         data-type2="<?php echo $pokemon['type_2']; ?>"
         generation ="<?php echo $pokemon['generation']; ?>"
         legendaire ="<?php echo $pokemon['légendaire']; ?>"
+        
         
     >
 
@@ -136,7 +143,7 @@ foreach ($requete as $pokemon) {
             <div> <strong>description : </strong><span id="pokemonDescription"></span></div>
             <div><strong>Prix Initial : </strong><span id="initialPrice" class="pokemon-price"></span></div>
             <div><strong>Prix après Remise : </strong><span id="discountedPrice" class="pokemon-discounted-price"></span></div>
-            <button class="button-ajouter">Ajouter au panier</button>
+            <button type="button" class="button-ajouter">Ajouter au Panier</button>
             </div>
         </div>
     </div>
@@ -183,8 +190,8 @@ function openPopup(name, image, description, generation, legendaire, price, disc
     document.getElementById('generation').textContent = generation;
     document.getElementById('legendaire').textContent = legendaire === '1' ? 'Oui' : 'Non';
     // Set price and discounted price
-    document.getElementById('initialPrice').textContent = price + '€';
-    document.getElementById('discountedPrice').textContent = discountedPrice + '€';
+    document.getElementById('initialPrice').textContent = price ; // j'ai modifié 
+    document.getElementById('discountedPrice').textContent = discountedPrice ; // j'ai modifié 
     popup.style.display = 'block';
 }
 
@@ -200,7 +207,7 @@ cards.forEach(card => {
         const discountedPriceElement = this.querySelector('.discounted-price');
     
         const price = priceElement ? priceElement.textContent : 'N/A';
-        const discountedPrice = discountedPriceElement ? discountedPriceElement.textContent : 'N/A';
+        const discountedPrice = discountedPriceElement ? discountedPriceElement.textContent : priceElement.textContent; // j'ai modifié 
 
         openPopup(name, image, description, generation, legendaire, price, discountedPrice);
     });
@@ -210,9 +217,42 @@ cards.forEach(card => {
     closePopup.addEventListener('click', function() {
         popup.style.display = 'none';
     });
+
+    // j'ai modifié 
+    document.querySelector('.button-ajouter').addEventListener('click', function() {
+        // Récupérer les données du produit sélectionné
+        const name = document.getElementById('pokemonName').textContent;
+        const price = document.getElementById('initialPrice').textContent;
+        const discountedPrice = document.getElementById('discountedPrice').textContent;
+
+        // Créer un objet JSON contenant les informations du produit
+        const produit = {
+            nom: name,
+            prix: price,
+            prixApresRemise: discountedPrice
+        };
+
+        // Envoyer les données du produit à la page ajouter_au_panier.php via une requête fetch
+        fetch('ajouter_au_panier.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(produit)
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Traiter la réponse de la page ajouter_au_panier.php si nécessaire
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'ajout au panier:', error);
+        });
+
+        alert("Votre Pokémon a été ajouté au panier");
+        location.reload(); // Rafraîchir la page après l'ajout au panier
+    });
 });
-
-
 </script>
 <style>
 .button-ajouter {
