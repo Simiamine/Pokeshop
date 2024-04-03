@@ -31,7 +31,7 @@
         <li><a  class="active" href="avantage.php" id="abonnement">Avantages</a></li>
         <li><a href="contact.php" id="contact">Contact</a></li>
         <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
-        <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+        <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li>
 
         <?php else: ?>
       <li><a  href="../index.php" id="menu">Menu</a></li>
@@ -39,7 +39,7 @@
       <li><a class="active" href="avantage.php" id="abonnement">Avantages</a></li>
       <li><a href="contact.php" id="contact">Contact</a></li>
       <li><a href="login.php" id="connexion">Connexion</a></li>
-      <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+      <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li>
         </ul>
 <?php endif; ?>
         </ul></div>

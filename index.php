@@ -29,7 +29,9 @@
         <li><a href="#" id="type">Pokedex</a></li>
         <li><a href="php/client/compte_client.php" id="compte">Compte</a></li>
         <li><a href="php/deconnexion.php" id="deconnexion">Déconnexion</a></li>
-        <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+        <!-- j'ai modifié -->
+        <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li> 
+
 
         <?php elseif (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'admin'): ?>
           <li>Compte_Admin </li>
@@ -45,7 +47,9 @@
       <li><a href="php/avantage.php" id="abonnement">Avantages</a></li>
       <li><a href="php/contact.php" id="contact">Contact</a></li>
       <li><a href="php/login.php" id="connexion">Connexion</a></li>
-      <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+      <!-- j'ai modifié -->
+      <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li> 
+
 <?php endif; ?>
 </ul>
 

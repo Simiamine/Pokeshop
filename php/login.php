@@ -27,7 +27,7 @@
                 <li><a href="avantage.php" id="abonnement">Avantages</a></li>
                 <li><a href="#" id="contact">Contact</a></li>
                 <li><a class="active" href="login.php" id="connexion">Connexion</a></li>
-                <li><a id="panier"  href="#"> <i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+                <li><a id="panier"  href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
             </ul>
         </div>
     </section>
