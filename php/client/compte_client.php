@@ -8,12 +8,12 @@
     <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
+    <title>Compte | Pokeshop</title>
     <script src="../js/pokemon.js" defer></script>
     <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pokedex.css">
-    
+    <link rel="icon" type="image/png" href="../../img/icon.png"/>
     </head>
 
     <body>
@@ -22,7 +22,7 @@
             <div class = "contenair">     
             <section id="header">
         <div class="logo">
-            <a href="../index.php"><img src="../img/icon.png" alt="pokeball" class = "logo" width="50"></a>
+            <a href="../../index.php"><img src="../../img/icon.png" alt="pokeball" class = "logo" width="50"></a>
         </div>
 
         <?php if (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'client'): ?>

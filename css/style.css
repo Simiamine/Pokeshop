@@ -67,35 +67,91 @@ header .logo span {
 /* differenciation en fonction de l'id, couleur qui change*/
 
 /* menu*/
-#navbar li a#menu:hover, 
-#navbar li a#menu.active
+#menu:hover, 
+#menu.active
 {
     color: #ec5565 ;
 }
 
-#navbar li a#menu:hover::after,
-#navbar li a#menu.active::after{
+#menu:hover::after,
+#menu.active::after{
     content: "" ;
-    width: 22%;
+    width: 21%;
     height: 3.5px;
+    background: #ec5565;
+    position: absolute;
+    border-radius: 60px;
+    bottom: -4px;
+    left: 80px;
+}
+
+/* catalogue*/
+#catalogue:hover, 
+#catalogue.active
+{
+    color: #ec5565 ;
+}
+#catalogue:hover::after,
+#catalogue.active::after{
+    content: "" ;
+    width: 33%;
+    height: 3.5px;
+    border-radius: 60px;
     background: #ec5565;
     position: absolute;
     bottom: -4px;
     left: 80px;
 }
 
+/* avantage */
+#avantage:hover, 
+#avantage.active
+{
+    color: #ec5565 ;
+}
+#avantage:hover::after,
+#avantage.active::after{
+    content: "" ;
+    width: 34%;
+    height: 3.5px;
+    border-radius: 60px;
+    background: #ec5565;
+    position: absolute;
+    bottom: -4px;
+    left: 78px;
+}
+
 /* contact */
-#navbar li a#contact:hover, 
-#navbar li a#contact.active
+#contact:hover, 
+#contact.active
 {
     color: #ec5565 ;
 }
 
-#navbar li a#contact:hover::after,
-#navbar li a#contact.active::after{
+#contact:hover::after,
+#contact.active::after{
     content: "" ;
-    width: 30%;
+    width: 27.5%;
     height: 3.5px;
+    border-radius: 60px;
+    background: #ec5565;
+    position: absolute;
+    bottom: -4px;
+    left: 80px;
+}
+
+/* connexion */
+#connexion:hover, 
+#connexion.active
+{
+    color: #ec5565 ;
+}
+#connexion:hover::after,
+#connexion.active::after{
+    content: "" ;
+    width: 33%;
+    height: 3.5px;
+    border-radius: 60px;
     background: #ec5565;
     position: absolute;
     bottom: -4px;
@@ -103,20 +159,24 @@ header .logo span {
 }
 
 /* panier */
-#navbar li a#panier:hover, 
-#navbar li a#panier.active
+#panier:hover, 
+#panier.active
 {
     color: #ec5565 ;
 }
 
+/* ancien
 #navbar li a#panier:hover::after,
 #navbar li a#panier.active::after{
+*/
+#panier:hover::after,
+#panier.active::after{
     content: "" ;
     width: 11%;
     height: 3.5px;
     background: #ec5565;
     position: absolute;
-    bottom: -4px;
+    bottom: -8px;
     left: 80px;
 }
 
@@ -274,6 +334,27 @@ body {
 
 h1 {
     font-size: 2.5rem; /* 40px si la taille de la police du body est de 16px */
+}
+
+
+/* Bouton deconnexion */
+#deconnexion{
+    border-radius: 13px;
+    border:none;
+    font-weight: bold;
+    font-size:1.2em;
+    padding:0.5em 0.8em 0.5em 0.8em!important;
+    transition:0.5s;
+    border:1px solid #ebebeb;
+}
+
+#deconnexion{
+    background:#ee1515;
+    color:#fff !important;
+}
+
+#deconnexion:hover{
+    background:#ff7373;
 }
 
 /* LE FOOTER DE ZARA */

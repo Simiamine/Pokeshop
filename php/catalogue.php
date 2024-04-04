@@ -5,155 +5,118 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/catalogue.js"></script>
-    <title>Pokedex</title>
-    <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/style.css">
-     <!-- j'ai modifié -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-
-
-   
-    
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../js/catalogue.js"></script>
+        <title>Catalogue | Pokeshop</title>
+        <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/style.css">
+        <!-- j'ai modifié -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="icon" type="image/png" href="../img/icon.png"/>
     </head>
-    <body>
-        <main class ="main">
-            <header class = header-home>
-            <div class = "contenair">     
-            <section id="header">
-        <div class="logo">
-            <a href="../index.php"><img src="../img/icon.png" alt="pokeball" class = "logo" width="50"></a>
-        </div>
+<?php include_once('../include/header.php'); ?>
+<script>
+    $("#catalogue").addClass("active");  // Fonction pour mettre la class "active" en fonction de la page
+</script>
 
-        <?php if (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'client'): ?>
-        <ul id="navbar">
-        <li>Bonjour, <?= htmlspecialchars($_SESSION['user_name']); ?></li>
-        <li><a  href="../index.php" id="menu">Menu</a></li>
-        <li><a href="catalogue.php" id="type">Catalogue</a></li>
-        <li><a href="#" id="type">Pokedex</a></li>
-        <li><a href="#" id="compte">Compte</a></li>
-        <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
-        <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>    
+<body>
 
-
-        <?php else: ?>
-            <ul id="navbar">
-      <li><a  href="../index.php" id="menu">Menu</a></li>
-      <li><a href="catalogue.php" id="type">Catalogue</a></li>
-      <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
-      <li><a  href="contact.php" id="contact">Contact</a></li>
-      <li><a href="login.php" id="connexion">Connexion</a></li>
-      <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>    
-
-        </ul>
-<?php endif; ?>
-</section>
-
-    <div class="search-wrap">
-        <input type="text" id="search-input" class="search-input" placeholder="Rechercher un pokemon">
-        <button class="search-btn"><i class="fa-solid fa-search fa-lg"></i></button>
+<div class="search-wrap">
+   <input type="text" id="search-input" class="search-input" placeholder="Rechercher un pokemon">
+   <button class="search-btn"><i class="fa-solid fa-search fa-lg"></i></button>
 </div>
 
 <div class="cards-container">
-<?php
-$requete = $bdd->query("SELECT * FROM Pokedex");
-foreach ($requete as $pokemon) {
-    $bg_color = "#929da3";
-    
-    switch ($pokemon['type_1']) {
-        case 'feu':
-            $bg_color = "#fe9d54";
-            break;
-        case 'plante':
-            $bg_color = "#63bc5a";
-            break;
-        case 'eau':
-            $bg_color = "#5190d7";
-            break;
-        default:
-            echo "";
-            break;
-    }
-    ?>
+   <?php
+      $requete = $bdd->query("SELECT * FROM Pokedex");
+      foreach ($requete as $pokemon) {
+          $bg_color = "#929da3";
+          
+          switch ($pokemon['type_1']) {
+              case 'feu':
+                  $bg_color = "#fe9d54";
+                  break;
+              case 'plante':
+                  $bg_color = "#63bc5a";
+                  break;
+              case 'eau':
+                  $bg_color = "#5190d7";
+                  break;
+              default:
+                  echo "";
+                  break;
+          }
+   ?>
+   <div class="card" style="width: 18rem; background-color: <?php echo $bg_color; ?>;"
+      data-name="<?php echo $pokemon['nom']; ?>" 
+      data-image="../img/<?php echo $pokemon['image']; ?>" 
+      data-description="<?php echo $pokemon['description']; ?>"
+      data-type="<?php echo $pokemon['type_1']; ?>"
+      data-type2="<?php echo $pokemon['type_2']; ?>"
+      generation ="<?php echo $pokemon['generation']; ?>"
+      legendaire ="<?php echo $pokemon['légendaire']; ?>"
+   >
+      <div class="card-img-top-container">
+         <img src="../img/<?php echo $pokemon['image']; ?>" class="card-img-top" alt="Image du pokemon">
+      </div>
+      <div class="card-body">
+         <h5 class="card-title"><?php echo $pokemon['nom']; ?></h5>
+         <p class="card-text">
+            <span class="pokemon-type"><?php echo $pokemon['type_1']; ?></span>
+            <span class="pokemon-type"><?php echo $pokemon['type_2']; ?></span>
+         </p>
+      </div>
+      <?php
+         $prixOriginal = floatval($pokemon['prix']);
+         $remise = floatval($pokemon['discount']);
+         
+         // Vérifie si une remise est appliquée
+         if ($remise > 0) {
+             $prixApresRemise = $prixOriginal - ($prixOriginal * ($remise / 100));
+             ?>
+      <p class="card-text">
+         Prix Original: <span class="original-price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
+      </p>
+      <div class="card-footer">
+         Prix remise: 
+         <span class="discounted-price"><?php echo number_format($prixApresRemise, 2, '.', ''); ?>€</span>
+      </div>
+      <?php
+         } else {
+             // Affiche simplement le prix original sans le barrer
+         ?>
+      <p class="card-text">
+         Prix: <span class="price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
+      </p>
+      <?php
+         }
+      ?>
+   </div>
+   <?php } ?>
+</div>
 
-   <div class="card" style="width: 18rem; background-color: <?php echo $bg_color; ?>;" 
-        data-name="<?php echo $pokemon['nom']; ?>" 
-        data-image="../img/<?php echo $pokemon['image']; ?>" 
-        data-description="<?php echo $pokemon['description']; ?>"
-        data-type="<?php echo $pokemon['type_1']; ?>"
-        data-type2="<?php echo $pokemon['type_2']; ?>"
-        generation ="<?php echo $pokemon['generation']; ?>"
-        legendaire ="<?php echo $pokemon['légendaire']; ?>"
-        
-        
-    >
-
-        <div class="card-img-top-container">
-            <img src="../img/<?php echo $pokemon['image']; ?>" class="card-img-top" alt="Image du pokemon">
-        </div>
-        <div class="card-body">
-            <h5 class="card-title"><?php echo $pokemon['nom']; ?></h5>
-            <p class="card-text">
-                <span class="pokemon-type"><?php echo $pokemon['type_1']; ?></span>
-                <span class="pokemon-type"><?php echo $pokemon['type_2']; ?></span>
-            </p>
-
-    <?php
-        $prixOriginal = floatval($pokemon['prix']);
-        $remise = floatval($pokemon['discount']);
-
-        // Vérifie si une remise est appliquée
-        if ($remise > 0) {
-            $prixApresRemise = $prixOriginal - ($prixOriginal * ($remise / 100));
-            ?>
-            <p class="card-text">
-                Prix Original: <span class="original-price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
-            </p>
-            <div class="card-footer">
-                Prix remise: 
-                <span class="discounted-price"><?php echo number_format($prixApresRemise, 2, '.', ''); ?>€</span>
-            </div>
-            <?php
-        } else {
-            // Affiche simplement le prix original sans le barrer
-        ?>
-            <p class="card-text">
-                Prix: <span class="price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
-            </p>
-            <?php
-    }
-?>
-    </div>
-    </div>
-
-    <div id="pokemonPopup" class="popup" style="display: none;">
-    <div class="popup-content">
-        <span class="close">&times;</span>
-        <div class="popup-flex-container">
-            <img id="pokemonImage" src="" alt="Image du Pokemon" />
-            <div class="popup-text-content">
-                <h3 id="pokemonName"></h3>
-                    <h3 id="pokemonName"></h3>
+<div id="pokemonPopup" class="popup" style="display: none;">
+   <div class="popup-content">
+      <span class="close">&times;</span>
+      <div class="popup-flex-container">
+         <img id="pokemonImage" src="" alt="Image du Pokemon" />
+         <div class="popup-text-content">
+            <h3 id="pokemonName"></h3>
             <div><strong>Génération : </strong><span id="generation" class="pokemon-generation"></span></div>
             <div><strong>Legendaire : </strong><span id="legendaire" class="pokemon-legendaire"></span></div>
             <div> <strong>description : </strong><span id="pokemonDescription"></span></div>
             <div><strong>Prix Initial : </strong><span id="initialPrice" class="pokemon-price"></span></div>
             <div><strong>Prix après Remise : </strong><span id="discountedPrice" class="pokemon-discounted-price"></span></div>
             <button type="button" class="button-ajouter">Ajouter au Panier</button>
-            </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
-
-<?php
-    }
- ?>
+ </body>
 <script>
 
 
@@ -450,10 +413,6 @@ cards.forEach(card => {
   }
 }
 </style>
-
-
- 
-</body>
 
 <?php include_once('../include/footer.php'); ?>
 </html>

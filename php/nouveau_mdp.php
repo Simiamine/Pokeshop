@@ -41,12 +41,13 @@ $bdd = null; // Fermer la connexion PDO
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouveau mot de passe</title>
+    <title>Nouveau mot de passe | Pokeshop</title>
     <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="../js/scriptLogin.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" type="image/png" href="../img/icon.png"/>
 </head>
 
 
