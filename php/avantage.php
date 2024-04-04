@@ -113,51 +113,6 @@
   }
 }
 
-.footer {
-  background-color: #1b1c1e;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.footer-content {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer-section {
-  flex-basis: 45%;
-  text-align: left;
-}
-
-.footer-section h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin-bottom: 5px;
-}
-
-.footer-section ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.footer-section ul li a:hover {
-  text-decoration: underline;
-}
-
-
-
-
 </style>
 </head>
 <body><br><br><br>
@@ -219,24 +174,5 @@
 </div>
 
 <br><br><br>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h3>Plan du site</h3>
-      <ul>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Catalogue</a></li>
-        <li><a href="#">Avantages</a></li>
-        <li><a href="#">Nous Contacter</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Mentions Légales</h3>
-      <ul>
-        <li><a href="#">Conditions d'utilisation</a></li>
-        <li><a href="#">Politique de confidentialité</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
-
+  <?php include_once('../include/footer.php'); ?>
+</html>

@@ -29,4 +29,7 @@
       <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
 
         </ul>
-
+</section>
+</body>
+<?php include_once('../include/footer.php'); ?>
+</html>

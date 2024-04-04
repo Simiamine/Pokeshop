@@ -20,6 +20,7 @@ body{
     width:450px;
     height:auto;
     margin-top:4em;
+    margin-bottom:4rem;
     left:50%;
     transform:translateX(-50%);
     background:#fff;
@@ -27,7 +28,7 @@ body{
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1)
+    box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 .form-modal button{
