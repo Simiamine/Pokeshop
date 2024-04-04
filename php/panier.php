@@ -91,27 +91,43 @@ if (isset($_POST['update_qty'])) {
         </div>
 
         <div>
+        <?php if (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'client'): ?>
+        <ul id="navbar">
+        <li>Bonjour, <?= htmlspecialchars($_SESSION['user_name']); ?></li>
+        <li><a  href="../index.php" id="menu">Menu</a></li>
+        <li><a href="catalogue.php" id="type">Catalogue</a></li>
+        <li><a href="#" id="type">Pokedex</a></li>
+        <li><a href="#" id="compte">Compte</a></li>
+        <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
+        <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+        </ul>
+
+        <?php else: ?>
             <ul id="navbar">
-                <li><a href="../index.php" id="menu">Menu</a></li>
-                <li><a href="pokedex.php" id="type">Pokedex</a></li>
-                <li><a href="avantage.php" id="abonnement">Avantages</a></li>
-                <li><a href="#" id="contact">Contact</a></li>
-                <li><a class="active" href="login.php" id="connexion">Connexion</a></li>
-                <!-- Affichage du nombre d'articles dans la barre de navigation -->
-                <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
-
-
-            </ul>
+      <li><a  href="../index.php" id="menu">Menu</a></li>
+      <li><a href="catalogue.php" id="type">Catalogue</a></li>
+      <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
+      <li><a  href="contact.php" id="contact">Contact</a></li>
+      <li><a href="login.php" id="connexion">Connexion</a></li>
+      <li><a id="panier" href="#"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
+        </ul>
+<?php endif; ?>
         </div>
     </section>
-
     <div class="container">
-    <h1 class="titre">Panier</h1>
+    <?php if (!isset($_SESSION['user_statut']) || $_SESSION['user_statut'] != 'client'): ?>
+        <h1 class="titre">
+        Pour profiter de notre avantage de fidélité, merci de vous connecter <a href="login.php" class="login.php">ici</a>
+        </h1>
+    <?php else: ?>
+        <h1 class="titre">Panier</h1>
+    <?php endif; ?>
+
     <?php if(empty($_SESSION['panier'])): ?>
     <div class="panier-vide">
-        <h1>Votre panier est vide.</h1>
+        <h2>Votre panier est vide.</h2>
     </div>
-    <?php else:?>
+    <?php else: ?>
     <div class="panier">
         <table id="panierTable">
             <thead>
@@ -124,6 +140,7 @@ if (isset($_POST['update_qty'])) {
                 </tr>
             </thead>
             <tbody>
+
                 <?php foreach ($_SESSION['panier'] as $index => $produit): ?>
                     <tr>
                         <td><?php echo $produit->nom; ?></td>

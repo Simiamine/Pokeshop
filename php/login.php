@@ -23,7 +23,7 @@
         <div>
         <ul id="navbar">
                 <li><a  href="../index.php" id="menu">Menu</a></li>
-                <li><a href="pokedex.php" id="type">Pokedex</a></li>
+                <li><a href="catalogue.php" id="type">Catalogue</a></li>
                 <li><a href="avantage.php" id="abonnement">Avantages</a></li>
                 <li><a href="#" id="contact">Contact</a></li>
                 <li><a class="active" href="login.php" id="connexion">Connexion</a></li>
