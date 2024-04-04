@@ -98,7 +98,7 @@ if (isset($_POST['update_qty'])) {
                 <li><a href="#" id="contact">Contact</a></li>
                 <li><a class="active" href="login.php" id="connexion">Connexion</a></li>
                 <!-- Affichage du nombre d'articles dans la barre de navigation -->
-                <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
+                <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
 
 
             </ul>

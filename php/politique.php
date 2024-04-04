@@ -33,7 +33,7 @@
         <li><a href="pokedex.php" id="type">Pokedex</a></li>
         <li><a href="compte_client.php" id="compte">Compte</a></li>
         <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
-        <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
+        <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
 
         </ul>
 
