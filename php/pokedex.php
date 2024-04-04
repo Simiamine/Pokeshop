@@ -35,7 +35,8 @@
         <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
         <li><a  href="contact.php" id="contact">Contact</a></li>
         <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
-        <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li>
+        <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
+
         </ul>
 
         <?php else: ?>
@@ -45,7 +46,8 @@
       <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
       <li><a  href="contact.php" id="contact">Contact</a></li>
       <li><a href="login.php" id="connexion">Connexion</a></li>
-      <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li>
+      <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
+
         </ul>
 <?php endif; ?>
 </section>

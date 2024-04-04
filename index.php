@@ -30,7 +30,7 @@
         <li><a href="php/client/compte_client.php" id="compte">Compte</a></li>
         <li><a href="php/deconnexion.php" id="deconnexion">Déconnexion</a></li>
         <!-- j'ai modifié -->
-        <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li> 
+        <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li> 
 
 
         <?php elseif (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'admin'): ?>
@@ -48,7 +48,7 @@
       <li><a href="php/contact.php" id="contact">Contact</a></li>
       <li><a href="php/login.php" id="connexion">Connexion</a></li>
       <!-- j'ai modifié -->
-      <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo count($_SESSION['panier']); ?></span></a></li> 
+      <li><a id="panier" href="php/panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>  
 
 <?php endif; ?>
 </ul>
