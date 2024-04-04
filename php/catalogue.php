@@ -126,7 +126,7 @@ foreach ($requete as $pokemon) {
             <p class="card-text">
                 Prix: <span class="price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
             </p>
-    <?php
+            <?php
     }
 ?>
     </div>
@@ -145,46 +145,15 @@ foreach ($requete as $pokemon) {
             <div> <strong>description : </strong><span id="pokemonDescription"></span></div>
             <div><strong>Prix Initial : </strong><span id="initialPrice" class="pokemon-price"></span></div>
             <div><strong>Prix après Remise : </strong><span id="discountedPrice" class="pokemon-discounted-price"></span></div>
-            
-
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Ajouter au Panier</button>
-
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirmation d'ajout au panier</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Votre Pokémon a été ajouté au panier.
+            <button type="button" class="button-ajouter">Ajouter au Panier</button>
             </div>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 <?php
     }
  ?>
-
 <script>
 
 
