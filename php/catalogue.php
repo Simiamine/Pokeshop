@@ -5,121 +5,154 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../js/catalogue.js"></script>
-        <title>Catalogue | Pokeshop</title>
-        <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../css/style.css">
-        <!-- j'ai modifié -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="icon" type="image/png" href="../img/icon.png"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/catalogue.js"></script>
+    <title>Pokedex</title>
+    <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+     <!-- j'ai modifié -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     </head>
-<?php include_once('../include/header.php'); ?>
-<script>
-    $("#catalogue").addClass("active");  // Fonction pour mettre la class "active" en fonction de la page
-</script>
+    <body>
+        <main class ="main">
+            <header class = header-home>
+            <div class = "contenair">     
+            <section id="header">
+        <div class="logo">
+            <a href="../index.php"><img src="../img/icon.png" alt="pokeball" class = "logo" width="50"></a>
+        </div>
 
-<body>
+        <?php if (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'client'): ?>
+        <ul id="navbar">
+        <li>Bonjour, <?= htmlspecialchars($_SESSION['user_name']); ?></li>
+        <li><a  href="../index.php" id="menu">Menu</a></li>
+        <li><a href="catalogue.php" id="type">Catalogue</a></li>
+        <li><a href="#" id="type">Pokedex</a></li>
+        <li><a href="#" id="compte">Compte</a></li>
+        <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
+        <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>    
 
-<div class="search-wrap">
-   <input type="text" id="search-input" class="search-input" placeholder="Rechercher un pokemon">
-   <button class="search-btn"><i class="fa-solid fa-search fa-lg"></i></button>
+
+        <?php else: ?>
+            <ul id="navbar">
+      <li><a  href="../index.php" id="menu">Menu</a></li>
+      <li><a href="catalogue.php" id="type">Catalogue</a></li>
+      <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
+      <li><a  href="contact.php" id="contact">Contact</a></li>
+      <li><a href="login.php" id="connexion">Connexion</a></li>
+      <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>    
+
+        </ul>
+<?php endif; ?>
+</section>
+    <div class="search-wrap">
+        <input type="text" id="search-input" class="search-input" placeholder="Rechercher un pokemon">
+        <button class="search-btn"><i class="fa-solid fa-search fa-lg"></i></button>
 </div>
 
 <div class="cards-container">
-   <?php
-      $requete = $bdd->query("SELECT * FROM Pokedex");
-      foreach ($requete as $pokemon) {
-          $bg_color = "#929da3";
-          
-          switch ($pokemon['type_1']) {
-              case 'feu':
-                  $bg_color = "#fe9d54";
-                  break;
-              case 'plante':
-                  $bg_color = "#63bc5a";
-                  break;
-              case 'eau':
-                  $bg_color = "#5190d7";
-                  break;
-              default:
-                  echo "";
-                  break;
-          }
-   ?>
-   <div class="card" style="width: 18rem; background-color: <?php echo $bg_color; ?>;"
-      data-name="<?php echo $pokemon['nom']; ?>" 
-      data-image="../img/<?php echo $pokemon['image']; ?>" 
-      data-description="<?php echo $pokemon['description']; ?>"
-      data-type="<?php echo $pokemon['type_1']; ?>"
-      data-type2="<?php echo $pokemon['type_2']; ?>"
-      generation ="<?php echo $pokemon['generation']; ?>"
-      legendaire ="<?php echo $pokemon['légendaire']; ?>"
-   >
-      <div class="card-img-top-container">
-         <img src="../img/<?php echo $pokemon['image']; ?>" class="card-img-top" alt="Image du pokemon">
-      </div>
-      <div class="card-body">
-         <h5 class="card-title"><?php echo $pokemon['nom']; ?></h5>
-         <p class="card-text">
-            <span class="pokemon-type"><?php echo $pokemon['type_1']; ?></span>
-            <span class="pokemon-type"><?php echo $pokemon['type_2']; ?></span>
-         </p>
-      </div>
-      <?php
-         $prixOriginal = floatval($pokemon['prix']);
-         $remise = floatval($pokemon['discount']);
-         
-         // Vérifie si une remise est appliquée
-         if ($remise > 0) {
-             $prixApresRemise = $prixOriginal - ($prixOriginal * ($remise / 100));
-             ?>
-      <p class="card-text">
-         Prix Original: <span class="original-price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
-      </p>
-      <div class="card-footer">
-         Prix remise: 
-         <span class="discounted-price"><?php echo number_format($prixApresRemise, 2, '.', ''); ?>€</span>
-      </div>
-      <?php
-         } else {
-             // Affiche simplement le prix original sans le barrer
-         ?>
-      <p class="card-text">
-         Prix: <span class="price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
-      </p>
-      <?php
-         }
-      ?>
-   </div>
-   <?php } ?>
-</div>
+<?php
+$requete = $bdd->query("SELECT * FROM Pokedex");
+foreach ($requete as $pokemon) {
+    $bg_color = "#929da3";
+    
+    switch ($pokemon['type_1']) {
+        case 'feu':
+            $bg_color = "#fe9d54";
+            break;
+        case 'plante':
+            $bg_color = "#63bc5a";
+            break;
+        case 'eau':
+            $bg_color = "#5190d7";
+            break;
+        default:
+            echo "";
+            break;
+    }
+    ?>
 
-<div id="pokemonPopup" class="popup" style="display: none;">
-   <div class="popup-content">
-      <span class="close">&times;</span>
-      <div class="popup-flex-container">
-         <img id="pokemonImage" src="" alt="Image du Pokemon" />
-         <div class="popup-text-content">
-            <h3 id="pokemonName"></h3>
+   <div class="card" style="width: 18rem; background-color: <?php echo $bg_color; ?>;" 
+        data-name="<?php echo $pokemon['nom']; ?>" 
+        data-image="../img/<?php echo $pokemon['image']; ?>" 
+        data-description="<?php echo $pokemon['description']; ?>"
+        data-type="<?php echo $pokemon['type_1']; ?>"
+        data-type2="<?php echo $pokemon['type_2']; ?>"
+        generation ="<?php echo $pokemon['generation']; ?>"
+        legendaire ="<?php echo $pokemon['légendaire']; ?>"
+        quantite ="<?php echo $pokemon['quantité']; ?>"
+        
+        
+    >
+
+        <div class="card-img-top-container">
+            <img src="../img/<?php echo $pokemon['image']; ?>" class="card-img-top" alt="Image du pokemon">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $pokemon['nom']; ?></h5>
+            <p class="card-text">
+                <span class="pokemon-type"><?php echo $pokemon['type_1']; ?></span>
+                <span class="pokemon-type"><?php echo $pokemon['type_2']; ?></span>
+            </p>
+
+    <?php
+        $prixOriginal = floatval($pokemon['prix']);
+        $remise = floatval($pokemon['discount']);
+
+        // Vérifie si une remise est appliquée
+        if ($remise > 0) {
+            $prixApresRemise = $prixOriginal - ($prixOriginal * ($remise / 100));
+            ?>
+            <p class="card-text">
+                Prix Original: <span class="original-price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
+            </p>
+            <div class="card-footer">
+                Prix remise: 
+                <span class="discounted-price"><?php echo number_format($prixApresRemise, 2, '.', ''); ?>€</span>
+            </div>
+            <?php
+        } else {
+            // Affiche simplement le prix original sans le barrer
+        ?>
+            <p class="card-text">
+                Prix: <span class="price"><?php echo number_format($prixOriginal, 2, '.', ''); ?>€</span>
+            </p>
+            <?php
+    }
+?>
+    </div>
+    </div>
+
+    <div id="pokemonPopup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <div class="popup-flex-container">
+            <img id="pokemonImage" src="" alt="Image du Pokemon" />
+            <div class="popup-text-content">
+                <h3 id="pokemonName"></h3>
+                    <h3 id="pokemonName"></h3>
             <div><strong>Génération : </strong><span id="generation" class="pokemon-generation"></span></div>
             <div><strong>Legendaire : </strong><span id="legendaire" class="pokemon-legendaire"></span></div>
             <div> <strong>description : </strong><span id="pokemonDescription"></span></div>
             <div><strong>Prix Initial : </strong><span id="initialPrice" class="pokemon-price"></span></div>
             <div><strong>Prix après Remise : </strong><span id="discountedPrice" class="pokemon-discounted-price"></span></div>
-            <button type="button" class="button-ajouter">Ajouter au Panier</button>
-         </div>
-      </div>
-   </div>
+            <div><span id="quantite"></span></div>
+             <!-- Bouton Ajouter au Panier avec couleur adaptée -->
+            <button type="button" class="button-ajouter" style="background-color: <?php echo $bg_color; ?>;">Ajouter au Panier</button>
+            </div>
+        </div>
+    </div>
 </div>
- </body>
+
+<?php
+    }
+ ?>
 <script>
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById('search-input');
     const cards = document.querySelectorAll('.card');
@@ -144,21 +177,40 @@ document.addEventListener("DOMContentLoaded", function() {
     const popupName = document.getElementById('pokemonName');
     const popupImage = document.getElementById('pokemonImage');
     const popupDescription = document.getElementById('pokemonDescription');
+    const quantite = document.getElementById('quantite');
     const closePopup = document.querySelector('.popup .close');
 
  // Fonction pour ouvrir la pop-up
-function openPopup(name, image, description, generation, legendaire, price, discountedPrice) {
+ function openPopup(name, image, description, generation, legendaire, quantite, price, discountedPrice) {
     popupName.textContent = name;
     popupImage.src = image;
     popupDescription.textContent = description;
     document.getElementById('generation').textContent = generation;
     document.getElementById('legendaire').textContent = legendaire === '1' ? 'Oui' : 'Non';
-    // Set price and discounted price
-    document.getElementById('initialPrice').textContent = price ; // j'ai modifié 
-    document.getElementById('discountedPrice').textContent = discountedPrice ; // j'ai modifié 
-    popup.style.display = 'block';
+
+    // Vérifie la quantité et ajuste l'affichage avec style
+    // Dans la fonction openPopup, ajustez la condition pour vérifier la quantité
+if (quantite <= 0) {
+    document.getElementById('quantite').innerHTML = "<span style='color: red; font-size: 1.5em;'>Victime de son succès</span>";
+    // Cacher le bouton Ajouter au Panier uniquement si le produit est épuisé
+    document.querySelector('.button-ajouter').style.display = 'none';
+} else {
+    // Si le produit n'est pas épuisé, assurez-vous que le bouton est visible
+    document.querySelector('.button-ajouter').style.display = 'block'; // Assurez-vous que cette ligne est présente pour réafficher le bouton pour les produits disponibles
+
+    // Vous pouvez aussi ajuster le contenu de 'quantite' pour les produits disponibles si nécessaire
+    if (quantite < 5) {
+        document.getElementById('quantite').innerHTML = `<span style="font-size: 1.5em;">Attention, il ne reste plus que <span style="color: red;">${quantite}</span> Pokémon !</span>`;
+    } else {
+        // Pour les produits avec suffisamment de stock, vous pouvez choisir de ne pas afficher de message spécifique
+        document.getElementById('quantite').textContent = '';
+    }
 }
 
+    document.getElementById('initialPrice').textContent = price;
+    document.getElementById('discountedPrice').textContent = discountedPrice;
+    popup.style.display = 'block';
+}
 
 cards.forEach(card => {
     card.addEventListener('click', function() {
@@ -167,13 +219,14 @@ cards.forEach(card => {
         const description = this.getAttribute('data-description');
         const generation = this.getAttribute('generation');
         const legendaire = this.getAttribute('legendaire');
+        const quantite = this.getAttribute('quantite');
         const priceElement = this.querySelector('.price') || this.querySelector('.original-price');
         const discountedPriceElement = this.querySelector('.discounted-price');
     
         const price = priceElement ? priceElement.textContent : 'N/A';
         const discountedPrice = discountedPriceElement ? discountedPriceElement.textContent : priceElement.textContent; // j'ai modifié 
 
-        openPopup(name, image, description, generation, legendaire, price, discountedPrice);
+        openPopup(name, image, description, generation, legendaire, quantite, price, discountedPrice);
     });
 });
 
@@ -223,18 +276,7 @@ cards.forEach(card => {
 // j'ai modifié 
 </script>
 <style>
-.button-ajouter {
-    display: inline-block; 
-    margin-top: 15px;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 5px; 
-    transition: background-color 0.3s ease; 
-}
 
-.button-ajouter:hover {
-    background-color: #45a049; 
-}
  
 #pokemonName {
     position: absolute; 
@@ -261,7 +303,7 @@ cards.forEach(card => {
     justify-content: center; 
     align-items: center; 
     z-index: 1000; /* S'assure que la pop-up soit au-dessus des autres éléments */
-   
+
 }
 
 .popup-content {
@@ -275,35 +317,62 @@ cards.forEach(card => {
     border-radius: 9px;
 }
 
-.popup-flex-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Aligner les éléments au début du conteneur */
-}
-
-.popup-text-content {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: -20px; /* Décaler vers le haut, ajustez selon le besoin */
-}
-
-#pokemonDescription {
-    font-size: 20px; 
-    text-align: center; 
-    max-width: 120%; /* Limite la largeur du texte pour éviter qu'il ne soit trop étendu */
-}
-
 .close {
     position: absolute;
     top: 10px;
     right: 20px;
-    font-size: 30px;
-    color: #000;
     cursor: pointer;
+    font-size: 25px;
+}
+
+.popup-flex-container {
+    display: flex;
+    align-items: flex-start; /* Alignement au début du conteneur */
+    gap: 20px; /* Espace entre l'image et le contenu textuel */
+}
+
+.popup-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.popup-text-content h3, .popup-text-content div, .button-ajouter {
+    margin-bottom: 15px; /* Espace entre les éléments */
+}
+
+#pokemonDescription {
+    font-size: 16px;
+    margin: 10px 0; /* Espacement autour de la description */
+    text-align: justify; /* Alignement du texte pour une lecture facile */
+    max-width: 100%; /* Assure que le texte ne dépasse pas du conteneur */
+}
+
+.button-ajouter {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-ajouter:hover {
+    background-color: #0056b3; /* Changement de couleur au survol */
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .popup-flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .popup-content {
+        width: 80%; /* Largeur plus grande pour les petits écrans */
+    }
 }
 
     /*style pour le prix */ 
@@ -413,6 +482,10 @@ cards.forEach(card => {
   }
 }
 </style>
+
+
+ 
+</body>
 
 <?php include_once('../include/footer.php'); ?>
 </html>
