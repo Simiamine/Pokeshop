@@ -7,19 +7,17 @@
     }
     
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ajouter un produit pokemon | Pokeshop</title>
-        <script src="../../js/pokemon.js" defer></script>
-        <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../../css/style.css">
-        <link rel="stylesheet" href="../../css/pokedex.css">
-        <link rel="stylesheet" href="../../css/bootstrap.css">
-        <link rel="icon" type="image/png" href="../../img/icon.png"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un produit</title>
+    <script src="../../js/pokemon.js" defer></script>
+    <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pokedex.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
     </head>
 
     <section id="header">
@@ -86,7 +84,6 @@ if (isset($_POST['ajouter'])) {
             ?>
 
 <!--Début du formulaire pour ajouter un produit-->
-
             <form method="post" enctype="multipart/form-data">
                 <label class="form-label">Nom</label>
                 <input type="text" class="form-control" name="nom">

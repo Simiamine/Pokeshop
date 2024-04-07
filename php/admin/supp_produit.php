@@ -6,7 +6,6 @@
         exit;
     }  
 ?>
-
 <?php 
     // Vérifier si l'ID du produit est présent
 if(isset($_GET['id']) && is_numeric($_GET['id'])){
