@@ -77,7 +77,8 @@ foreach ($requete as $pokemon) {
     }
     ?>
 
-   <div class="card" style="width: 18rem; background-color: <?php echo $bg_color; ?>;" 
+   <div class="card" style="width: 18rem; background-color: <?php echo $bg_color; ?>;"
+        data-id="<?php echo $pokemon['id']; ?>" 
         data-name="<?php echo $pokemon['nom']; ?>" 
         data-image="../img/<?php echo $pokemon['image']; ?>" 
         data-description="<?php echo $pokemon['description']; ?>"
@@ -135,7 +136,7 @@ foreach ($requete as $pokemon) {
             <img id="pokemonImage" src="" alt="Image du Pokemon" />
             <div class="popup-text-content">
                 <h3 id="pokemonName"></h3>
-                    <h3 id="pokemonName"></h3>
+            <div>Pokémon ID: <span id="pokemonID"></span></div>
             <div><strong>Génération : </strong><span id="generation" class="pokemon-generation"></span></div>
             <div><strong>Legendaire : </strong><span id="legendaire" class="pokemon-legendaire"></span></div>
             <div> <strong>description : </strong><span id="pokemonDescription"></span></div>
@@ -179,9 +180,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const popupDescription = document.getElementById('pokemonDescription');
     const quantite = document.getElementById('quantite');
     const closePopup = document.querySelector('.popup .close');
-
+    const popupid = document.getElementById('pokemonID')
  // Fonction pour ouvrir la pop-up
- function openPopup(name, image, description, generation, legendaire, quantite, price, discountedPrice) {
+ function openPopup(id,name, image, description, generation, legendaire, quantite, price, discountedPrice) {
+    popupid.textContent =  id;
     popupName.textContent = name;
     popupImage.src = image;
     popupDescription.textContent = description;
@@ -214,6 +216,7 @@ if (quantite <= 0) {
 
 cards.forEach(card => {
     card.addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
         const name = this.getAttribute('data-name');
         const image = this.getAttribute('data-image');
         const description = this.getAttribute('data-description');
@@ -226,7 +229,7 @@ cards.forEach(card => {
         const price = priceElement ? priceElement.textContent : 'N/A';
         const discountedPrice = discountedPriceElement ? discountedPriceElement.textContent : priceElement.textContent; // j'ai modifié 
 
-        openPopup(name, image, description, generation, legendaire, quantite, price, discountedPrice);
+        openPopup(id, name, image, description, generation, legendaire, quantite, price, discountedPrice);
     });
 });
 
@@ -244,12 +247,14 @@ cards.forEach(card => {
         //console.log(price);
         const discountedPrice = document.getElementById('discountedPrice').textContent;
         //console.log(discountedPrice);
+        const ID = document.getElementById('pokemonID').textContent;
 
         // Créer un objet JSON contenant les informations du produit
         const produit = {
             nom: name,
             prix: price,
-            prixApresRemise: discountedPrice
+            prixApresRemise: discountedPrice,
+            pokemon_id: ID
         };
         console.log(produit);
 
