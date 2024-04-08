@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/catalogue.js"></script>
@@ -16,43 +16,17 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    </head>
-    <body>
-        <main class ="main">
-            <header class = header-home>
-            <div class = "contenair">     
-            <section id="header">
-        <div class="logo">
-            <a href="../index.php"><img src="../img/icon.png" alt="pokeball" class = "logo" width="50"></a>
-        </div>
+</head>
 
-        <?php if (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'client'): ?>
-        <ul id="navbar">
-        <li>Bonjour, <?= htmlspecialchars($_SESSION['user_name']); ?></li>
-        <li><a  href="../index.php" id="menu">Menu</a></li>
-        <li><a href="catalogue.php" id="type">Catalogue</a></li>
-        <li><a href="#" id="type">Pokedex</a></li>
-        <li><a href="#" id="compte">Compte</a></li>
-        <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
-        <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>    
+<?php include_once('../include/header.php'); ?>
+<script>
+    $("#catalogue").addClass("active");  // Fonction pour mettre la class "active" en fonction de la page
+</script>
 
-
-        <?php else: ?>
-            <ul id="navbar">
-      <li><a  href="../index.php" id="menu">Menu</a></li>
-      <li><a href="catalogue.php" id="type">Catalogue</a></li>
-      <li><a  href="avantage.php" id="abonnement">Avantages</a></li>
-      <li><a  href="contact.php" id="contact">Contact</a></li>
-      <li><a href="login.php" id="connexion">Connexion</a></li>
-      <li><a id="panier" href="panier.php"> <i class="fa-solid fa-bag-shopping fa-xl"></i> <span id="panierCount"><?php echo isset($_SESSION['panier'])? count($_SESSION['panier']) : 0; ?></span></a></li>    
-
-        </ul>
-<?php endif; ?>
-</section>
-    <div class="search-wrap">
-        <input type="text" id="search-input" class="search-input" placeholder="Rechercher un pokemon">
-        <button class="search-btn"><i class="fa-solid fa-search fa-lg"></i></button>
+<body>  
+<div class="search-wrap">
+    <input type="text" id="search-input" class="search-input" placeholder="Rechercher un pokemon">
+    <button class="search-btn"><i class="fa-solid fa-search fa-lg"></i></button>
 </div>
 
 <div class="cards-container">

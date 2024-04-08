@@ -66,7 +66,7 @@
             </div>
 			<div id="rep_inscription"> </div>
             <button type="button" class="btn signup" onclick="inscript()">S'inscrire</button>
-            <p>En cliquant sur le bouton, vous acceptez notre <a href="javascript:void(0)">politique de confidentialité</a>.</p>
+            <p>En cliquant sur le bouton, vous acceptez notre <a href="politique.php">politique de confidentialité</a>.</p>
             <hr/>
            
         </form>

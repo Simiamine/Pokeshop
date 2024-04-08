@@ -1,5 +1,5 @@
 <?php 
-    // session_start();
+    session_start();
     // if(!isset($_SESSION['user']) || $_SESSION['statut'] != "client"){
     //     header('Location: ../../index.php');
     // }

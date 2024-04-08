@@ -66,119 +66,78 @@ header .logo span {
 
 /* differenciation en fonction de l'id, couleur qui change*/
 
+.ligne-header:hover, .ligne-header.active {
+    color: #ec5565 !important;
+}
+.ligne-header:hover::after, .ligne-header.active::after {
+    color: #ec5565 !important;
+    content: "" ;
+    height: 3.5px;
+    background: #ec5565;
+    position: absolute;
+    border-radius: 60px;
+    bottom: -4px;
+    left: 80px;
+}
+
 /* menu*/
-#menu:hover, 
-#menu.active
-{
-    color: #ec5565 ;
-}
-
-#menu:hover::after,
-#menu.active::after{
-    content: "" ;
+#menu::after{
     width: 21%;
-    height: 3.5px;
-    background: #ec5565;
-    position: absolute;
-    border-radius: 60px;
-    bottom: -4px;
-    left: 80px;
 }
 
-/* catalogue*/
-#catalogue:hover, 
-#catalogue.active
-{
-    color: #ec5565 ;
-}
-#catalogue:hover::after,
-#catalogue.active::after{
-    content: "" ;
+/* catalogue */
+#catalogue::after{
     width: 33%;
-    height: 3.5px;
-    border-radius: 60px;
-    background: #ec5565;
-    position: absolute;
-    bottom: -4px;
-    left: 80px;
 }
 
 /* avantage */
-#avantage:hover, 
-#avantage.active
-{
-    color: #ec5565 ;
-}
-#avantage:hover::after,
-#avantage.active::after{
-    content: "" ;
-    width: 34%;
-    height: 3.5px;
-    border-radius: 60px;
-    background: #ec5565;
-    position: absolute;
-    bottom: -4px;
-    left: 78px;
+#avantage::after{
+    width: 33.5%;
 }
 
 /* contact */
-#contact:hover, 
-#contact.active
-{
-    color: #ec5565 ;
+#contact::after{
+    width: 27.5%;
 }
 
-#contact:hover::after,
-#contact.active::after{
-    content: "" ;
-    width: 27.5%;
-    height: 3.5px;
-    border-radius: 60px;
-    background: #ec5565;
-    position: absolute;
-    bottom: -4px;
-    left: 80px;
+/* ajtPokemon */
+#ajtPokemon::after{
+    width: 45%;
+}
+/* commande */
+#commande::after{
+    width: 37.5%;
+}
+/* compte */
+#compte::after{
+    width: 27%;
+}
+
+/* pokedex */
+#pokedex::after{
+    width: 29%;
+}
+
+/* pokemon */
+#pokemon::after{
+    width: 33%;
 }
 
 /* connexion */
-#connexion:hover, 
-#connexion.active
-{
-    color: #ec5565 ;
-}
-#connexion:hover::after,
-#connexion.active::after{
-    content: "" ;
+#connexion::after{
     width: 33%;
-    height: 3.5px;
-    border-radius: 60px;
-    background: #ec5565;
-    position: absolute;
-    bottom: -4px;
-    left: 80px;
 }
 
 /* panier */
-#panier:hover, 
-#panier.active
-{
-    color: #ec5565 ;
+#panier::after{
+    width: 11%;
+    bottom: -8px;
 }
 
 /* ancien
 #navbar li a#panier:hover::after,
 #navbar li a#panier.active::after{
 */
-#panier:hover::after,
-#panier.active::after{
-    content: "" ;
-    width: 11%;
-    height: 3.5px;
-    background: #ec5565;
-    position: absolute;
-    bottom: -8px;
-    left: 80px;
-}
 
 /* plante */
 #navbar li a#plante:hover, 
