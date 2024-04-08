@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="../../css/style.css">
         <link rel="stylesheet" href="../../css/pokedex.css">
         <link rel="stylesheet" href="../../css/bootstrap.css">
+        <link rel="icon" type="image/png" href="../../img/icon.png"/>
     </head>
 
     <?php include_once('../../include/header.php'); ?>

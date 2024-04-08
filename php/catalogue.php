@@ -11,6 +11,7 @@
     <title>Pokedex</title>
     <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../img/icon.png"/>
      <!-- j'ai modifié -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
