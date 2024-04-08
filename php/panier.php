@@ -56,21 +56,21 @@ if (isset($_POST['update_qty'])) {
 <script>
             $(document).ready(function() {
              
-            // Fonction pour calculer le total du panier en JavaScript
-              function calculerTotalPanier() {
-                let total = 0;
-                $('#panierTable tbody tr').each(function() {
-                    let prixUnitaire = parseFloat($(this).find('td:nth-child(2)').text());
-                    let quantiteInput = $(this).find('input[name="new_qty"]');
-                    let quantite = parseInt(quantiteInput.val());
-                    if (!isNaN(quantite) && quantite > 0) { // Vérifier si la quantité est un nombre valide et supérieure à zéro
-                        let totalProduit = prixUnitaire * quantite;
-                        $(this).find('.totalProduit').text(totalProduit.toFixed(2));
-                        total += totalProduit;
-                    }
-                });
-                $('#total').text(total.toFixed(2));
-            }
+        function calculerTotalPanier() {
+            let total = 0;
+            $('#panierTable tbody tr').each(function() {
+                let prixUnitaire = parseFloat($(this).find('td:nth-child(3)').text());
+                let quantiteInput = $(this).find('input[name="new_qty"]');
+                let quantite = parseInt(quantiteInput.val());
+                if (!isNaN(quantite) && quantite > 0) {
+                    let totalProduit = prixUnitaire * quantite;
+                    $(this).find('.totalProduit').text(totalProduit.toFixed(2));
+                    total += totalProduit;
+                }
+            });
+            // Mettre à jour la cellule de total global
+            $('.totalGlobal').text(total.toFixed(2));
+        }
 
 
             // Mettre à jour le total lors du chargement de la page
@@ -106,6 +106,7 @@ if (isset($_POST['update_qty'])) {
         <table id="panierTable">
             <thead>
                 <tr>
+                    <th>ID du Pokémon</th>
                     <th>Nom du produit</th>
                     <th>Prix unitaire</th>
                     <th>Quantité</th>
@@ -116,6 +117,7 @@ if (isset($_POST['update_qty'])) {
             <tbody>
                 <?php foreach ($_SESSION['panier'] as $index => $produit): ?>
                     <tr>
+                        <td><?php echo $produit->pokemon_id; ?></td>
                         <td><?php echo $produit->nom; ?></td>
                         <td><?php echo $produit->prixApresRemise; ?></td>
                         <td>
@@ -137,7 +139,7 @@ if (isset($_POST['update_qty'])) {
             <tfoot>
                 <tr>
                     <td colspan="3"><strong>Total</strong></td>
-                    <td colspan="2" id="total">0</td>
+                    <td colspan="2" id="total" class="totalGlobal">0</td>
                 </tr>
             </tfoot>
         </table>
