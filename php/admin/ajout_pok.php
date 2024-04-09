@@ -40,7 +40,7 @@
             <main class="col overflow-auto h-100 w-100">
                 <div class="container py-2">
                     <h2>Liste des pokemons</h2>
-                    <a href="ajout_produit_pokemon.php" class="btn btn-primary">Ajouter produit</a>
+                    <a href="php/admin/ajout_produit_pokemon.php" class="btn btn-primary">Ajouter produit</a>
                     <table class="table table-striped table-hover">
                         <!-- Début de l'en-tête du tableau -->
                         <thead>

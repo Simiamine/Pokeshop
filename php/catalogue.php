@@ -60,21 +60,68 @@
 $requete = $bdd->query("SELECT * FROM Pokedex");
 foreach ($requete as $pokemon) {
     $bg_color = "#929da3";
-    
+
     switch ($pokemon['type_1']) {
+        case 'normal':
+            $bg_color = "#929da3";
+            break;
+        case 'combat':
+            $bg_color = "#cf406b";
+            break;
+        case 'vol':
+            $bg_color = "#8fa8df";
+            break;
+        case 'poison':
+            $bg_color = "#ab6ac8";
+            break;
+        case 'sol':
+            $bg_color = "#d97944";
+            break;
+        case 'roche':
+            $bg_color = "#c5b68d";
+            break;
+        case 'insecte':
+            $bg_color = "#91c12f";
+            break;
+        case 'spectre':
+            $bg_color = "#5268ac";
+            break;
+        case 'acier':
+            $bg_color = "#5b8ea3";
+            break;
         case 'feu':
             $bg_color = "#fe9d54";
-            break;
-        case 'plante':
-            $bg_color = "#63bc5a";
             break;
         case 'eau':
             $bg_color = "#5190d7";
             break;
-        default:
+        case 'plante':
+            $bg_color = "#63bc5a";
+            break;
+        case 'electrique':
+            $bg_color = "#f5d33c";
+            break;
+        case 'psy':
+            $bg_color = "#fb7178";
+            break;
+        case 'glace':
+            $bg_color = "#72cfc0";
+            break;
+        case 'dragon':
+            $bg_color = "#0a6dc2";
+            break;
+        case 'tenebre':
+            $bg_color = "#5a5564";
+            break;
+        case 'fee':
+            $bg_color = "#ec8ee7";
+            break;
+        default: 
             echo "";
             break;
     }
+    // Utilisez $bg_color comme vous le souhaitez ici
+
     ?>
 
    <div class="card" style="width: 18rem; background-color: <?php echo $bg_color; ?>;"

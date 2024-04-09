@@ -142,8 +142,13 @@ if (isset($_POST['update_qty'])) {
                     <td colspan="2" id="total" class="totalGlobal">0</td>
                 </tr>
             </tfoot>
-        </table>
-    </div>
+        </table> 
+
+        <div style="margin-left: 40%;margin-right: 25%;">
+        <button  class="btn-submit" title="Passer commande" a href="../../php/client/valider_commande.php">Valider ma commande</button>
+         </div>
+
+    </div> 
     <?php endif; ?>
 </div>
 </body>
@@ -238,6 +243,22 @@ body{
     display: inline-block;
     font-size: 12px;
     margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-submit {
+    background-color: #52f436;
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    
+    font-size: 14px;
+    margin: 1em auto 2em auto;
+    margin-left:auto;
+    margin-right:auto;
     cursor: pointer;
     border-radius: 5px;
 }
