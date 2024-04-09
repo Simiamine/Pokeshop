@@ -16,24 +16,17 @@
     <title>Ajouter un produit</title>
     <script src="../js/pokemon.js" defer></script>
     <script src="https://kit.fontawesome.com/d6a49ddf6e.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="icon" type="image/png" href="../../img/icon.png"/>
+
     </head>
 
-    <section id="header">
-        <div class="logo">
-            <a href="../../index.php"><img src="../../img/icon.png" alt="pokeball" class = "logo" width="50"></a>
-        </div>
-            <ul id="navbar">
-          <li>Compte_Admin </li>
-        <li><a href="../../index.php" id="menu">Menu</a></li>
-        <li><a href="#" id="type">Analyse</a></li>
-        <li><a class="active" href="ajout_pok.php" id="abonnement"> Pokemons</a></li>
-        <li><a href="#" id="contact">Commandes</a></li>
-        <li><a href="../deconnexion.php" id="deconnexion">Déconnexion</a></li>
-            </ul>
-
-    </section>
+    <?php include_once('../../include/header.php'); ?>
+    <script>
+        $("#pokemon").addClass("active");  // Fonction pour mettre la class "active" en fonction de la page
+    </script>
 
 <div class="mt-3 container-fluid pb-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
         <div class="row flex-grow-sm-1 flex-grow-0 container-fluid">

@@ -50,21 +50,21 @@ h2 {
     display: flex; 
     justify-content: center;
     align-items: center; 
-    height: 100vh; 
+
 }
 
 .formulaire{
     margin-left: auto;
     margin-right: auto;
     padding: 15px;
-    width: 1200px;
+    width: 600px;
 }
 
 #contact-form .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; 
+    min-height: 71vh; 
 }
 
 #contact-form .formulaire {
