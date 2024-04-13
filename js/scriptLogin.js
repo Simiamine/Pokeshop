@@ -246,7 +246,7 @@ function inscript(){  // Fonction inscription
               
             }
             if(error == -999){
-              $("#rep_inscription").html("Les données ont bien étées inscrites dans la bdd");
+              $("#rep_inscription").html("Bienvenue parmi nous dresseur Pokemon !");
               $("#rep_inscription").addClass("alert-vert");
             }
             console.log(response);
