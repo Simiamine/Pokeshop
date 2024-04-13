@@ -237,3 +237,12 @@
         background-color : #ffcccb;
     }
 }
+
+/* PAGE NOUVEAU MOT DE PASSE */
+.titre{
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
