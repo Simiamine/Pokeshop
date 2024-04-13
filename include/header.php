@@ -1,5 +1,5 @@
 <?php 
-$path = "/".basename(dirname(dirname(__FILE__)));  // Définir le chemin de base en utilisant DOCUMENT_ROOT
+$path = "/".basename(dirname(dirname(__FILE__)));  // Permet d'obtenir le nom du dossier ou sont stocké tout les fichiers
 ?>
 <header>
 <section id="header">
