@@ -5,6 +5,7 @@
 
 //include la fonction databaseconnect.php 
 include '../include/databaseconnect.php';
+
 if(isset($_GET['token'])){
     $token = $_GET['token'];  // Recuperation du token se trouvant dans le lien
 }

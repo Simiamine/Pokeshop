@@ -1,9 +1,10 @@
 <?php 
    session_start();
+   include 'envoiMail.php';  // Include la fonction pour envoyer le mail contact
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -44,31 +45,19 @@
 
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        ini_set("SMTP","smtp.gmail.com");
-        ini_set("smtp_port","587");
         $name = strip_tags(trim($_POST["name"]));
         $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
         $message = trim($_POST["message"]);
 
         if (empty($name) || !filter_var($email, FILTER_VALIDATE_EMAIL) || empty($message)) {
-            echo "Veuillez corriger vos entrées.";
+            echo "Veuillez remplir les champs.";
             exit;
         }
 
-        $file = "demandes.txt"; 
-        $entry = "Nom: $name\nEmail: $email\nMessage: $message\n\n";
-
-        file_put_contents($file, $entry, FILE_APPEND | LOCK_EX);
-
-        $to = "meven.thomas@gmail.com"; 
-        $subject = "Nouvelle demande de contact";
-        $email_body = "Vous avez reçu une nouvelle demande de contact.\n\n".$entry;
-        $headers = "From: $email";
-
-        if (mail($to, $subject, $email_body, $headers)) {
-            echo "Votre message a été envoyé.";
+        if (mailContact($name, $email, $message)) {
+            echo "Votre message a été envoyé avec succès !";
         } else {
-            echo "Désolé, quelque chose s'est mal passé.";
+            echo "Hmmm... Il y a une erreur...";
         }
     }
 ?>

@@ -4,7 +4,7 @@ $temps_attente = 8;
 $temps_attenteMailMdp = 10;
 
 include '../include/databaseconnect.php'; // Assurez-vous que ce chemin d'accès est correct
-
+include 'envoiMail.php';  // Include la fonction pour envoyer le mail Token
 
 function test(string $prenom, string $nom, string $email, string $tel, string $dateNaiss, string $mdp1, string $mdp2 , array $erreur){
     // Fonction qui vérifie toute les données en fonction de chaques conditions
@@ -183,9 +183,6 @@ function reinitExiste(PDO $pdo, int $idUser){
     }
     return 1;
 }
-function envoieMail(string $mail){
-    //mail("s", "test", "ceci est un test", "oui");
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  // Si la requête est bien reçu
     // Vérifier si toutes les données ont été envoyées   
@@ -248,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {  // Si la requête est bien reçu
                 $stmt2->bindParam(':token', $token, PDO::PARAM_STR);
                 // // Exécuter la requête
                 $stmt2->execute();
-                envoieMail($email);
+                mailToken($email, $token);
             }else{
                 $valErreur = -11;
             }
