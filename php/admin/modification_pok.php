@@ -20,8 +20,19 @@
     <link rel="stylesheet" href="../../css/bootstrap.css">
     </head>
 
-    <?php include_once('../../include/header.php'); ?>
-    
+    <section id="header">
+        <div class="logo">
+            <a href="../index.php"><img src="../../img/icon.png" alt="pokeball" class = "logo" width="50"></a>
+        </div>
+        <ul id="navbar">
+          <li>Compte_Admin </li>
+            <li><a href="../../index.php" id="menu">Menu</a></li>
+            <li><a href="#" id="type">Analyse</a></li>
+            <li><a class="active" href="ajout_pok.php" id="abonnement"> Pokemons</a></li>
+            <li><a href="#" id="contact">Commandes</a></li>
+            <li><a href="../deconnexion.php" id="deconnexion">Déconnexion</a></li>
+        </ul>
+    </section>
     <main class="col overflow-auto h-100 w-100">
                 <a class="btn btn-dark btn-sm" href="ajout_pok.php">← Retour</a><br><br>
 
