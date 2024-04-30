@@ -92,7 +92,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="change_mdp.php" method="POST">
+                                    <form action="../change_mdp.php" method="POST">
                                         <label for='current_password'>Mot de passe actuel</label>
                                         <input type="password" id="current_password" name="current_password"
                                             class="form-control" required />
