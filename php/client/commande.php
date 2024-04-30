@@ -46,49 +46,40 @@
 
 <main class="flex-grow-4">
 <h2>Liste de mes Commandes</h2>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>#ID</th>
-                                <th>Numéro commande</th>
-                                <th>Total</th>
-                                <th>Date</th>
-                                <th>Statut</th>
-                                <th>Opérations</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        // Récupération des données depuis la base de données
-                        
-                        if (isset($_SESSION['user_id'])) {  // Vérifie si l'utilisateur est connecté.
-                            try {
-                                $requete = $bdd->prepare("SELECT * FROM commandes WHERE id = :id");
-                                $requete->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_INT);
-                                $requete->execute();
-                        
-                                // Si la requête retourne des résultats, affichez-les
-                                if ($requete->rowCount() > 0) {
-                                    echo "<table class='table table-striped table-hover'>";
-                                    echo "<thead><tr><th>#ID</th><th>Numéro commande</th><th>Total</th><th>Date</th><th>Statut</th><th>Opérations</th></tr></thead><tbody>";
-                                    while ($commande = $requete->fetch(PDO::FETCH_ASSOC)) {
-                                        echo "<tr>";
-                                        echo "<td>" . htmlspecialchars($commande['id']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($commande['numero_commande']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($commande['total']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($commande['date_creation']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($commande['statut']) . "</td>";
-                                        echo "<td><a href='details_commande.php?id=" . $commande['id'] . "'>Voir détails</a></td>";
-                                        echo "</tr>";
-                                    }
-                                    echo "</tbody></table>";
-                                } else {
-                                    echo "<p>Aucune commande trouvée.</p>";
-                                }
-                            } catch (PDOException $e) {
-                                die("Erreur de base de données : " . $e->getMessage());
-                            }
-                        } else {
-                            echo "<p>Veuillez vous connecter pour voir vos commandes.</p>";
-                        }
-                        ?>
+    <table class="table table-striped table-hover">
+        <?php
+        // Récupération des données depuis la base de données
+        require '../../include/databaseconnect.php';
+
+        if (isset($_SESSION['user_id'])) {  // Vérifie si l'utilisateur est connecté.
+            try {
+                // Prépare une requête SQL pour sélectionner les commandes où id_utilisateur correspond à l'id de l'utilisateur en session
+                $requete = $bdd->prepare("SELECT * FROM commandes WHERE id_utilisateur = :id_user ORDER BY commandes.date_creation DESC");
+                $requete->bindParam(':id_user', $_SESSION['user_id'], PDO::PARAM_INT);
+                $requete->execute();
+        
+                // Si la requête retourne des résultats, affichez-les
+                if ($requete->rowCount() > 0) {
+                    echo "<table class='table table-striped table-hover'>";
+                    echo "<thead><tr><th>Numéro commande</th><th>Adresse de livraison </th><th>Total</th><th>Date</th><th>nouveau point</th><th>Opérations</th></tr></thead><tbody>";
+                    while ($commande = $requete->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($commande['numero_commande']) . "</td>";
+                        echo "<td>" . htmlspecialchars($commande['adresse_livraison']) . "</td>";
+                        echo "<td>" . htmlspecialchars($commande['total']) . "</td>";
+                        echo "<td>" . htmlspecialchars($commande['date_creation']) . "</td>";
+                        echo "<td>" . htmlspecialchars($commande['point_avantage']) . "</td>";
+                        echo "<td><a href='facture.php?id=" . $commande['id'] . "'>Afficher facture</a></td>";
+                        echo "</tr>";
+                    }
+                    echo "</tbody></table>";
+                } else {
+                    echo "<p>Aucune commande passé.</p>";
+                }
+            } catch (PDOException $e) {
+                die("Erreur de base de données : " . $e->getMessage());
+            }
+        } else {
+            echo "<p>Veuillez vous connecter pour voir vos commandes.</p>";
+        }
+        ?>
