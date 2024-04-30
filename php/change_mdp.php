@@ -41,7 +41,7 @@
                     "id" => $_SESSION['user_id']
                 ));
                 // si tout se passe correctement on redirige vers la page profil 
-                header('Location:compte_client.php');
+                header('Location:client/compte_client.php');
                 die();
             }
         }
