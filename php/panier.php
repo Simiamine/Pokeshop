@@ -29,13 +29,24 @@ if (isset($_POST['update_qty'])) {
     header("Location: panier.php");
     exit();
 }
-// Vérifier si un code promotionnel a été soumis
-if (isset($_POST['code_promo']) && $_POST['code_promo'] === 'POKE20') {
-    // Appliquer une réduction de 20% sur le total
-    foreach ($_SESSION['panier'] as $produit) {
-        $produit->prixApresRemise = $produit->prixApresRemise * 0.8; // 20% de réduction
+
+/// Calculer le total global
+$total = 0;
+foreach ($_SESSION['panier'] as $produit) {
+    if (is_numeric($produit->prix) && is_numeric($produit->quantite)) {
+        $total += $produit->prix * $produit->quantite;
     }
 }
+
+// Appliquer la réduction si le code promo est valide
+if (isset($_POST['code_promo']) && $_POST['code_promo'] == 'POKE20') {
+    // Appliquer une réduction de 20%
+    $total_reduit = $total * 0.8; // Réduction de 20%
+} else {
+    $total_reduit = $total; // Si aucun code promo n'est appliqué, le total reste inchangé
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -185,17 +196,17 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] === 'POKE20') {
             <option value="express">Express</option>
         </select>
     </div> -->
+    <form action="panier.php" method="POST" class="commande-form" style="margin-top: 20px;">
     <div class="form-group" style="display: inline-block; margin-right: 10px;">
-        <label for="code_promo">Code de promotion :</label>
-        <input type="text" id="code_promo" name="code_promo">
-    </div>
-    <button type="submit" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
-
-    <div style="margin-left: 25%; margin-right: 25%;">
-        <button class="btn-submit" title="Passer commande" a href="../../php/client/valider_commande.php">Valider ma commande</button>
-    </div>
+    <label for="code_promo">Code de promotion :</label>
+    <input type="text" id="code_promo" name="code_promo">
+</div>
+<button type="submit" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
 </form>
 
+<div class="commande-form" style="margin-left: 25%; margin-right: 25%; margin-top: 20px;">
+    <button class="btn-submit" title="Passer commande" style="background-color: #52f436; color: black; border: none; padding: 15px 30px; text-align: center; text-decoration: none; font-size: 14px; cursor: pointer; border-radius: 5px;">Valider ma commande</button>
+</div>
     </div> 
     <?php endif; ?>
 </div>
