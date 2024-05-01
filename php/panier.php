@@ -198,10 +198,21 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] == 'POKE20') {
     </div> -->
     <form action="panier.php" method="POST" class="commande-form" style="margin-top: 20px;">
     <div class="form-group" style="display: inline-block; margin-right: 10px;">
+<<<<<<< HEAD
     <label for="code_promo">Code de promotion :</label>
     <input type="text" id="code_promo" name="code_promo">
 </div>
 <button type="submit" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
+=======
+        <label for="code_promo">Code de promotion :</label>
+        <input type="text" id="code_promo" name="code_promo">
+    </div>
+    <button type="submit" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
+
+    <div style="margin-left: 25%; margin-right: 25%;">
+        <button class="btn-submit" title="Passer commande" a href="client/valider_commande.php">Valider ma commande</button>
+    </div>
+>>>>>>> efb72ecab13673ad819e4c05c910b755080b82d4
 </form>
 
 <div class="commande-form" style="margin-left: 25%; margin-right: 25%; margin-top: 20px;">

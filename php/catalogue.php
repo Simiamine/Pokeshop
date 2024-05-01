@@ -148,6 +148,11 @@ foreach ($requete as $pokemon) {
             <?php
     }
 ?>
+<div id="no-results" style="display: none;">
+    <p>Désolé, nous n'avons pas trouvé de résultat pour votre recherche. Voici quelques produits qui pourraient vous intéresser :</p>
+    <div id="suggested-pokemon"></div>
+</div>
+
     </div>
     </div>
 
@@ -176,23 +181,40 @@ foreach ($requete as $pokemon) {
     }
  ?>
 <script>
+
+//barre de recherche
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById('search-input');
     const cards = document.querySelectorAll('.card');
-    
+    const noResultsDiv = document.getElementById('no-results');
+
     searchInput.addEventListener('input', function() {
         const searchText = this.value.toLowerCase();
-        
+        let found = false;
+
         cards.forEach(card => {
             const name = card.querySelector('.card-title').textContent.toLowerCase();
-            if (name.includes(searchText)) {
+            const types = card.querySelectorAll('.pokemon-type');
+            const type1 = types[0] ? types[0].textContent.toLowerCase() : '';
+            const type2 = types[1] ? types[1].textContent.toLowerCase() : '';
+
+            // Affiche la carte si le nom commence par searchText ou si l'un des types correspond à searchText
+            if (name.startsWith(searchText) || type1 === searchText || type2 === searchText) {
                 card.style.display = '';
+                found = true;
             } else {
                 card.style.display = 'none';
             }
         });
+
+        // Afficher ou cacher la div "no-results" basé sur si un Pokémon a été trouvé
+        noResultsDiv.style.display = found ? 'none' : 'block';
     });
 });
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const cards = document.querySelectorAll('.card');
@@ -514,7 +536,7 @@ cards.forEach(card => {
  
 </body>
 
-<?php include_once('../include/footer.php'); ?>
+
 </html>
 
 
