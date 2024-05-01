@@ -45,7 +45,7 @@
                                 <th>Numéro commande</th>
                                 <th>Ville</th>
                                 <th>Code postal </th>
-                                <th>Point</th>
+                                <th>Livraison</th>
                                 <th>Total</th>
                                 <th> Date </th>
                                 <th>Opérations</th>
@@ -65,7 +65,7 @@
                         echo "<td>" . $commande['numero_commande'] . "</td>";
                         echo "<td>" . $commande['ville'] . "</td>";
                         echo "<td>" . $commande['code_postal'] . "</td>";
-                        echo "<td>" . $commande['point_avantage'] . "</td>";
+                        echo "<td>" . $commande['livraison'] . "</td>";
                         echo "<td>" . $commande['total'] . "€</td>";
                         echo "<td>" . $commande['date_creation'] . "</td>";
                         echo "<td><a class='btn btn-primary' href='#?id=" . $commande['id'] . "'>Afficher détails</a></td>";

@@ -53,7 +53,7 @@ if (isset($_POST['ajouter'])) {
     if (!empty($_FILES['image']['name'])) {
         // Génération d'un nom unique pour l'image et ajout de l'extension de l'image
         $image = $_FILES['image']['name'];
-        $filename = '../img/'.uniqid() . $image;
+        $filename = '../../img/'.uniqid() . $image;
     }
 
                     // Vérification si les champs obligatoires ont été remplis
@@ -64,7 +64,7 @@ if (isset($_POST['ajouter'])) {
                         // Vérification si l'insertion a été réussie
                         if ($inserted) {
                             // Déplacement de l'image téléchargée dans le dossier de destination
-                            move_uploaded_file($_FILES['image']['tmp_name'], '../img/' . $filename);
+                            move_uploaded_file($_FILES['image']['tmp_name'], '../../img/' . $filename);
 
                             // Redirection vers la page des produits
                             header('location: ajout_pok.php');

@@ -95,15 +95,12 @@
 <body><br><br><br>
 <body>
 
-<div class="program-title">Le programme de fidélité Pokeshop</div>
+<div class="program-title">Le programme de fidélité Pokeshop à seulement 9.99 €/an</div>
 <div class="program-description">
     <p>Rejoignez dès maintenant le programme de fidélité Pokeshop et commencez à cumuler des points à chaque commande pour bénéficier d'avantages exclusifs.</p>
     <p>En devenant membre de notre programme de fidélité, vous accédez à une multitude d'avantages. Vous profiterez de réductions attractives, d'offres spéciales, mais aussi d'invitations à des événements exclusifs et à des avant-premières de nouvelles sorties. </p>
     <br><p><em>Que votre quête soit de trouver le Pokémon légendaire de vos rêves ou de compléter votre collection par génération, notre vaste sélection est là pour satisfaire chaque besoin.</em></p>
-<em><p>Le système de points est très simple : <span style="color: red;">1€ dépensé = 1 Point</span>. Accumulez des points tout simplement en vous identifiant lors de chaque commande, que ce soit en ligne ou en magasin.</p></em>
 
-
-<img src="../img/point.png" alt="Points de fidélité">
 
 </div>
 
@@ -113,7 +110,7 @@
   <div class="text-with-image">
     <div class="text">
       <h1>Dresseur débutant</h1>
-      <em>0 points :</em>
+      <em>Entre 0 et 150 €</em>
       <p>En tant que débutant, vous recevrez <strong>un cadeau de bienvenue</strong> spécial pour marquer le début de votre aventure. De plus, vous aurez un accès exclusif aux ventes privées de Pokémon, où vous pourrez trouver des Pokémon rares et des articles de collection. Profitez de ces avantages pour commencer votre voyage avec un coup de pouce!</p>
     </div>
     <div class="image-right">
@@ -124,7 +121,7 @@
   <div class="image-with-text">
     <div class="text2">
       <h1>Dresseur intermédiaire</h1>
-      <em>100 points :</em>
+      <em>Entre 150 et 550 €</em>
       <p> À ce stade, vous êtes récompensé pour vos efforts avec la possibilité de recevoir <strong> des cadeaux spéciaux </strong>. Ces cadeaux peuvent inclure des objets utiles pour vos Pokémon, des bonus de points ou même des invitations à des événements exclusifs réservés aux dresseurs intermédiaires. Continuez à explorer le monde Pokémon et à entraîner vos Pokémon pour atteindre ce niveau et obtenir des récompenses encore plus grandes!</p>
     </div>
     <div class="image2">
@@ -137,8 +134,8 @@
   <div class="text-with-image">
     <div class="text">
       <h1>Dresseur d'élite</h1>
-      <em>300 points :</em>
-      <p>Le statut de dresseur d'élite est réservé à ceux qui ont atteint un niveau exceptionnel de compétence et de dévouement. Avec 500 points, vous rejoignez les rangs des dresseurs les plus prestigieux et les plus respectés.  En tant que dresseur d'élite, vous bénéficiez de <strong>privilèges exclusifs </strong>, tels que l'accès à des Pokémon légendaires, des défis spéciaux réservés aux meilleurs dresseurs et même la possibilité de participer à des tournois d'élite pour des récompenses fabuleuses !</p>
+      <em>Entre 550 et 1000 €</em>
+      <p>Le statut de dresseur d'élite est réservé à ceux qui ont atteint un niveau exceptionnel de compétence et de dévouement. Vous rejoignez les rangs des dresseurs les plus prestigieux et les plus respectés.  En tant que dresseur d'élite, vous bénéficiez de <strong>privilèges exclusifs </strong>, tels que l'accès à des Pokémon légendaires, des défis spéciaux réservés aux meilleurs dresseurs et même la possibilité de participer à des tournois d'élite pour des récompenses fabuleuses !</p>
     </div>
     <div class="image-right">
       <img src="../img/image3.png" alt="Dresseur d'élite">

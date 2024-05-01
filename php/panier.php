@@ -192,7 +192,7 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] === 'POKE20') {
     <button type="submit" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
 
     <div style="margin-left: 25%; margin-right: 25%;">
-        <button class="btn-submit" title="Passer commande" a href="../../php/client/valider_commande.php">Valider ma commande</button>
+        <button class="btn-submit" title="Passer commande" a href="client/valider_commande.php">Valider ma commande</button>
     </div>
 </form>
 

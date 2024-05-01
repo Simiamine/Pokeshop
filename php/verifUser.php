@@ -106,6 +106,7 @@ function testco(string $email, string $mdp, array $erreur){
     return $erreur;
 }
 
+
 //Verifier l'unicite d'un mail
 function mailUnique(PDO $pdo, string $mail){
     $sql = "SELECT COUNT(*) FROM utilisateur WHERE email = :Mail";
