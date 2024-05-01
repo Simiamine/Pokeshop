@@ -156,7 +156,7 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] === 'POKE20') {
                 </tr>
             </tfoot>
         </table> 
-
+        <!--
         <form action="../../php/client/valider_commande.php" method="POST" class="commande-form">
     <div class="form-group">
         <label for="nom">Nom :</label>
@@ -184,7 +184,7 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] === 'POKE20') {
             <option value="standard">Standard</option>
             <option value="express">Express</option>
         </select>
-    </div>
+    </div> -->
     <div class="form-group" style="display: inline-block; margin-right: 10px;">
         <label for="code_promo">Code de promotion :</label>
         <input type="text" id="code_promo" name="code_promo">
