@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Traitement du formulaire ici
+}  
+
+
 // Initialiser le panier s'il n'existe pas encore
 if (!isset($_SESSION['panier'])) {
     $_SESSION['panier'] = array();
@@ -30,7 +36,7 @@ if (isset($_POST['update_qty'])) {
     exit();
 }
 
-/// Calculer le total global
+// Calculer le total global
 $total = 0;
 foreach ($_SESSION['panier'] as $produit) {
     if (is_numeric($produit->prix) && is_numeric($produit->quantite)) {
@@ -38,13 +44,19 @@ foreach ($_SESSION['panier'] as $produit) {
     }
 }
 
-// Appliquer la réduction si le code promo est valide
-if (isset($_POST['code_promo']) && $_POST['code_promo'] == 'POKE20') {
-    // Appliquer une réduction de 20%
-    $total_reduit = $total * 0.8; // Réduction de 20%
-} else {
-    $total_reduit = $total; // Si aucun code promo n'est appliqué, le total reste inchangé
+// Initialiser le total réduit
+$total_reduit = $total;
+
+/// Vérifier si le formulaire de code promo a été soumis
+if (isset($_POST['code_promo'])) {
+    $code_promo = $_POST['code_promo'];
+
+    // Vérifier si le code promo est valide
+    if ($code_promo == '259325') {
+        $total_reduit = $total * 0.8; // Réduction de 20%
+    }
 }
+
 
 
 ?>
@@ -106,6 +118,27 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] == 'POKE20') {
                 });
             });
         });
+
+        $(document).ready(function() {
+    // Gestionnaire d'événements pour le bouton "Appliquer le code"
+    $('#apply-code-btn').click(function(e) {
+        e.preventDefault(); // Empêche l'envoi du formulaire
+
+        // Récupérer la valeur du code promo saisi par l'utilisateur
+        var promoCode = $('#code_promo').val();
+
+        // Vérifier si le code promo est valide
+        if (promoCode === '259325') {
+            // Appliquer une réduction de 20% sur le total
+            var total = parseFloat($('.totalGlobal').text());
+            var reducedTotal = total * 0.8;
+            $('.totalGlobal').text(reducedTotal.toFixed(2));
+            alert('Code promo appliqué !');
+        } else {
+            alert('Code promo invalide.');
+        }
+    });
+});
     </script>
 <body>
     <div class="container">
@@ -158,7 +191,7 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] == 'POKE20') {
             <tfoot>
                 <tr>
                     <td colspan="3"><strong>Total</strong></td>
-                    <td colspan="2" id="total" class="totalGlobal">0</td>
+                    <td colspan="2" id="total" class="totalGlobal"><?php echo isset($total_reduit) ? $total_reduit : $total; ?></td>
                     <td>
                     <form action="vider_panier.php" method="POST">
                     <button type="submit" class="btn btn-danger">Vider le panier</button>
@@ -196,24 +229,15 @@ if (isset($_POST['code_promo']) && $_POST['code_promo'] == 'POKE20') {
             <option value="express">Express</option>
         </select>
     </div> -->
-    <form action="panier.php" method="POST" class="commande-form" style="margin-top: 20px;">
+    <div class="commande-form">
+    <form action="panier.php" method="POST">
     <div class="form-group" style="display: inline-block; margin-right: 10px;">
-<<<<<<< HEAD
-    <label for="code_promo">Code de promotion :</label>
-    <input type="text" id="code_promo" name="code_promo">
-</div>
-<button type="submit" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
-=======
         <label for="code_promo">Code de promotion :</label>
         <input type="text" id="code_promo" name="code_promo">
     </div>
-    <button type="submit" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
-
-    <div style="margin-left: 25%; margin-right: 25%;">
-        <button class="btn-submit" title="Passer commande" a href="client/valider_commande.php">Valider ma commande</button>
-    </div>
->>>>>>> efb72ecab13673ad819e4c05c910b755080b82d4
+    <button type="submit"  id="apply-code-btn" +style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
 </form>
+</div>
 
 <div class="commande-form" style="margin-left: 25%; margin-right: 25%; margin-top: 20px;">
     <button class="btn-submit" title="Passer commande" style="background-color: #52f436; color: black; border: none; padding: 15px 30px; text-align: center; text-decoration: none; font-size: 14px; cursor: pointer; border-radius: 5px;">Valider ma commande</button>
