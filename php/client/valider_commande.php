@@ -93,6 +93,20 @@ $total = 0;
             
             <label for="code_postal">Code postal:</label>
             <input id="code_postal" type="text" name="code_postal" placeholder="Code postal" maxlength="10" required/> <br>
+            <fieldset>
+                <legend>Moyen de livraison:</legend>
+                <label>
+                    <input type="radio" name="livraison" required> Standard
+                </label><br>
+                
+                <label>
+                    <input type="radio" name="livraison" > relais
+                </label><br>
+                
+                <label>
+                    <input type="radio" name="livraison"> Express
+                </label><br>
+            </fieldset>
 
             <fieldset>
                 <legend>Moyen de paiement:</legend>
@@ -112,7 +126,7 @@ $total = 0;
                 </label><br>
             </fieldset>
             
-            <button  class="btn-submit" title="Passer commande" onclick="location.href='../php/client/commande_vers_bdd.php';">Valider ma commande</button>
+            <button  class="btn-submit" title="Passer commande" onclick="location.href='../php/commande_vers_bdd.php';">Valider ma commande</button>
         </form>
     </div>
 </div>   

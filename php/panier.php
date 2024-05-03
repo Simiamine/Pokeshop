@@ -240,8 +240,9 @@ if (isset($_POST['code_promo'])) {
 </div>
 
 <div class="commande-form" style="margin-left: 25%; margin-right: 25%; margin-top: 20px;">
-    <button class="btn-submit" title="Passer commande" style="background-color: #52f436; color: black; border: none; padding: 15px 30px; text-align: center; text-decoration: none; font-size: 14px; cursor: pointer; border-radius: 5px;">Valider ma commande</button>
+    <a href="client/valider_commande.php" class="btn-submit" style="background-color: #52f436; color: black; border: none; padding: 15px 30px; text-align: center; text-decoration: none; font-size: 14px; cursor: pointer; border-radius: 5px; display: inline-block;">Valider ma commande</a>
 </div>
+
     </div> 
     <?php endif; ?>
 </div>

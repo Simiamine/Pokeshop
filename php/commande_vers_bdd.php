@@ -19,13 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $codePostal = $_POST['code_postal'];
     // Récupérer les données de la session
     $idUtilisateur = $_SESSION['user_id']; // Assurez-vous que cette variable est bien initialisée dans la session
-    $pointAvantage = 100; // Points avantages toujours de 100
-     // Code postal toujours de 95180
+    $livraison = $_POST['livraison'];; // Points avantages toujours de 100
     $total = $_SESSION['finalPrice']; // Calcul du total du panier
     $numeroCommande = uniqid(); // Génération d'un identifiant unique pour la commande
 
     // Préparer la requête SQL
-    $query = "INSERT INTO commandes (id_utilisateur, adresse_livraison, ville, code_postal, point_avantage, total, numero_commande, date_creation)
+    $query = "INSERT INTO commandes (id_utilisateur, adresse_livraison, ville, code_postal, livraison, total, numero_commande, date_creation)
               VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
 
     if ($stmt = $bdd->prepare($query)) {
@@ -35,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindValue(2, $adresseLivraison, PDO::PARAM_STR);
         $stmt->bindValue(3, $ville, PDO::PARAM_STR);
         $stmt->bindValue(4, $codePostal, PDO::PARAM_INT);
-        $stmt->bindValue(5, $pointAvantage, PDO::PARAM_INT);
+        $stmt->bindValue(5, $livraison, PDO::PARAM_INT);
         $stmt->bindValue(6, $total, PDO::PARAM_INT); 
         $stmt->bindValue(7, $numeroCommande, PDO::PARAM_STR);
 
@@ -63,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $quantite = $produit->quantite;
     
             // Lier les variables et exécuter la requête
-            $stmt->bindValue(1, $numeroCommande, PDO::PARAM_INT);
+            $stmt->bindValue(1, $numeroCommande, PDO::PARAM_STR);
             $stmt->bindValue(2, $idPokemon, PDO::PARAM_INT);
             $stmt->bindValue(3, $quantite, PDO::PARAM_INT);
             $stmt->execute();
