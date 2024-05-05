@@ -32,7 +32,39 @@
     </section>
 
       </div>
-    </nav>
+    </nav><br><br><br>
+    <?php
+    require  'include/databaseconnect.php';
+
+    $requete = $bdd->query("SELECT * FROM Pokedex ORDER BY RAND() LIMIT 3");
+    ?>
+
+<nav class="jumbo-nav">
+  <div class="container">
+    <div class="row">
+      <?php
+        while ($row = $requete->fetch()) {
+          $imgPath = "./img/" . $row['image']; 
+          echo '<div class="col-md-4">';
+          echo '  <div class="pokeball-wrapper">';
+          echo '    <img src="./img/pokeball.png" />'; 
+          echo '  </div>';
+          echo '  <div class="enhanced">';
+          echo '    <h2>' . htmlspecialchars($row['nom']) . '</h2>'; 
+          echo '    <img class="pokemon small" src="' . htmlspecialchars($imgPath) . '" />'; 
+          echo '    Description : ' . html_entity_decode($row['description']) . '</p>'; 
+          echo '    Type principal : ' . htmlspecialchars($row['type_1']) . '</p>'; 
+          echo '     Remise de : <a style="color: red; font-size: 1.5em;">' . htmlspecialchars($row['discount']) . '%</p>'; 
+          echo '    <p><a class="btn btn-default" href="php/catalogue.php" role="button">View details &raquo;</a></p>';
+          echo '  </div>';
+          echo '</div>';
+        }
+      ?>
+    </div>
+  </div>
+</nav>
+
+    
 
 </body>
 <?php include_once('include/footer.php'); ?>
