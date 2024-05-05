@@ -23,7 +23,9 @@
 </script>
 
 <body>
-    
+    <div id="offreTemp">
+      !&nbsp!&nbsp! &nbsp&nbsp EN CE MOMENT -20% SUR TOUTE LA BOUTIQUE AVEC LE CODE : <u><span id="code">MemePasUnPeu?</span></u> &nbsp&nbsp !&nbsp!&nbsp!
+    </div>
 
     <section id="hero">
         <h2>Achetez votre propre</h2>

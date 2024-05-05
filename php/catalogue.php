@@ -94,7 +94,7 @@ foreach ($requete as $pokemon) {
         default: 
             echo "";
             break;
-    }
+    }   
     // Utilisez $bg_color comme vous le souhaitez ici
 
     ?>
@@ -176,7 +176,6 @@ foreach ($requete as $pokemon) {
         </div>
     </div>
 </div>
-
 <?php
     }
  ?>
@@ -535,7 +534,6 @@ cards.forEach(card => {
 
  
 </body>
-
 
 </html>
 

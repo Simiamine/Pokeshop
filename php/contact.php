@@ -31,6 +31,8 @@
     <div class="container">
         <div class="formulaire">
         <form action="contact.php" method="post">
+            <div id="titreContact">Contact</div><br>
+            <div id="infoComp">Veuillez remplir le formulaire ci dessous<br> Ou contactez-nous au <a style="color : #cc0000;" href tel=0123456789>+33 1 23 45 67 89</a><br></div>
             <label for="name">Nom :</label><br>
             <input type="text" id="name" name="name" required><br>
             <label for="email">Email :</label><br>
@@ -55,9 +57,9 @@
         }
 
         if (mailContact($name, $email, $message)) {
-            echo "Votre message a été envoyé avec succès !";
+            echo "<div class='alert-vert'>Votre message a été envoyé avec succès !</div>";
         } else {
-            echo "Hmmm... Il y a une erreur...";
+            echo "<div class='alert-orange'>Hmmm... Il y a une erreur...</div>";
         }
     }
 ?>
