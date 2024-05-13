@@ -128,7 +128,7 @@ if (isset($_POST['code_promo'])) {
         var promoCode = $('#code_promo').val();
 
         // Vérifier si le code promo est valide
-        if (promoCode === '259325') {
+        if (promoCode === 'MemePasUnPeu?') {
             // Appliquer une réduction de 20% sur le total
             var total = parseFloat($('.totalGlobal').text());
             var reducedTotal = total * 0.8;
@@ -235,11 +235,11 @@ if (isset($_POST['code_promo'])) {
         <label for="code_promo">Code de promotion :</label>
         <input type="text" id="code_promo" name="code_promo">
     </div>
-    <button type="submit"  id="apply-code-btn" +style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
+    <button type="submit"  id="apply-code-btn" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
 </form>
 </div>
 
-<div class="commande-form" style="margin-left: 25%; margin-right: 25%; margin-top: 20px;">
+<div class="commande-form" style="margin-left: 40%; margin-right: 25%; margin-top: 20px;">
     <a href="client/valider_commande.php" class="btn-submit" style="background-color: #52f436; color: black; border: none; padding: 15px 30px; text-align: center; text-decoration: none; font-size: 14px; cursor: pointer; border-radius: 5px; display: inline-block;">Valider ma commande</a>
 </div>
 
