@@ -48,7 +48,6 @@
                                 <th>Livraison</th>
                                 <th>Total</th>
                                 <th> Date </th>
-                                <th>Opérations</th>
                             </tr>
                         </thead>
 
@@ -68,7 +67,6 @@
                         echo "<td>" . $commande['livraison'] . "</td>";
                         echo "<td>" . $commande['total'] . "€</td>";
                         echo "<td>" . $commande['date_creation'] . "</td>";
-                        echo "<td><a class='btn btn-primary' href='#?id=" . $commande['id'] . "'>Afficher détails</a></td>";
                         echo "</tr>";
 }
 ?>
