@@ -126,7 +126,7 @@ $total = 0;
                 </label><br>
             </fieldset>
             
-            <button  class="btn-submit" title="Passer commande" onclick="location.href='../php/commande_vers_bdd.php';">Valider ma commande</button>
+            <button  class="btn-submit" title="Passer commande" onclick="location.href='../commande_vers_bdd.php';">Valider ma commande</button>
         </form>
     </div>
 </div>   

@@ -126,28 +126,35 @@ if (isset($_POST['code_promo'])) {
         }
     }
 
-        $(document).ready(function() {
-            // Mettre à jour le total lors du chargement de la page
-            calculerTotalPanier();
-    // Gestionnaire d'événements pour le bouton "Appliquer le code"
+    $(document).ready(function() {
+    // Mettre à jour le total lors du chargement de la page
+    calculerTotalPanier();
+
+    var compteur = 0; // Initialiser le compteur en dehors de la fonction de clic
+
     $('#apply-code-btn').click(function(e) {
         e.preventDefault(); // Empêche l'envoi du formulaire
 
         // Récupérer la valeur du code promo saisi par l'utilisateur
         var promoCode = $('#code_promo').val();
 
-        // Vérifier si le code promo est valide
-        if (promoCode === 'MemePasUnPeu?') {
-            // Appliquer une réduction de 20% sur le total
-            var total = parseFloat($('.totalGlobal').text());
-            var reducedTotal = total * 0.8;
-            $('.totalGlobal').text(reducedTotal.toFixed(2));
-            alert('Code promo appliqué !');
+        if (compteur >= 1) {
+            alert('Vous pouvez utiliser ce code une seule fois');
         } else {
-            alert('Code promo invalide.');
+            if (promoCode === 'MemePasUnPeu?') {
+                // Appliquer une réduction de 20% sur le total
+                var total = parseFloat($('.totalGlobal').text());
+                var reducedTotal = total * 0.8;
+                $('.totalGlobal').text(reducedTotal.toFixed(2));
+                compteur++; // Incrémenter le compteur après l'application du code
+                alert('Code promo appliqué !');
+            } else {
+                alert('Code promo invalide.');
+            }
         }
     });
 });
+
     </script>
 <body>
     <div class="container">
