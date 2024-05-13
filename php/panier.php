@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../include/databaseconnect.php'; // Pour se connecter a la bdd
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Traitement du formulaire ici
@@ -20,19 +20,10 @@ if (isset($_GET['supprimer']) && isset($_SESSION['panier'][$_GET['supprimer']]))
 }
 
 // Mettre à jour la quantité d'un produit dans le panier
-if (isset($_POST['update_qty'])) {
+if (isset($_POST['update_qty'], $_POST['index'], $_POST['new_qty'] )) {
     $index = $_POST['index'];
     $new_qty = $_POST['new_qty'];
-
-    // Vérifier si la nouvelle quantité est valide
-    // la vérification se fait enft dans ajouter_au_panier.php mais je l'ai laissé ici au cas ou 
-    if ($new_qty > 0 && is_numeric($new_qty)) {
-        $_SESSION['panier'][$index]->quantite = $new_qty;
-    } else {
-        // Supprimer le produit s'il y a une quantité invalide
-        unset($_SESSION['panier'][$index]);
-    }
-    header("Location: panier.php");
+    $_SESSION['panier'][$index]->quantite = $new_qty;
     exit();
 }
 
@@ -85,41 +76,59 @@ if (isset($_POST['code_promo'])) {
     $("#panier").addClass("active");  // Fonction pour mettre la class "active" en fonction de la page
 </script>
 <script>
-            $(document).ready(function() {
-             
         function calculerTotalPanier() {
-            let total = 0;
-            $('#panierTable tbody tr').each(function() {
-                let prixUnitaire = parseFloat($(this).find('td:nth-child(3)').text());
-                let quantiteInput = $(this).find('input[name="new_qty"]');
-                let quantite = parseInt(quantiteInput.val());
-                if (!isNaN(quantite) && quantite > 0) {
-                    let totalProduit = prixUnitaire * quantite;
-                    $(this).find('.totalProduit').text(totalProduit.toFixed(2));
-                    total += totalProduit;
-                }
-            });
-            // Mettre à jour la cellule de total global
-            $('.totalGlobal').text(total.toFixed(2));
-        }
-
-
-            // Mettre à jour le total lors du chargement de la page
-            calculerTotalPanier();
-
-            // Écouter les soumissions du formulaire de quantité et recalculer le total
-            $('#panierTable').on('submit', '.qtyForm', function(e) {
-                e.preventDefault();
-                let index = $(this).data('index');
-                let newQty = $(this).find('input[name="new_qty"]').val();
-                $.post('panier.php', { update_qty: true, index: index, new_qty: newQty }, function() {
-                    // Mettre à jour la quantité et recalculer le total
-                    calculerTotalPanier();
-                });
-            });
+        let total = 0;
+        $('#panierTable tbody tr').each(function() {
+            let prixUnitaire = parseFloat($(this).find('td:nth-child(3)').text());
+            let quantiteInput = $(this).find('input[name="new_qty"]');
+            let quantite = parseInt(quantiteInput.val());
+            if (!isNaN(quantite) && quantite > 0) {
+                let totalProduit = prixUnitaire * quantite;
+                $(this).find('.totalProduit').text(totalProduit.toFixed(2));
+                total += totalProduit;
+            }
         });
+        // Mettre à jour la cellule de total global
+        $('.totalGlobal').text(total.toFixed(2));
+    }
+
+    // Fonction pour mettre a jour le panier et tout...
+    function majPanier(element){
+        var index = $(element).data('index');
+        var id = $(element).data('idpok');
+        var nom = $(element).data('nom');
+        var newQty = parseInt($(element).val());
+        var minValue = parseInt(($(element).attr('min')));
+        var maxValue = parseInt($(element).attr('max'));
+        //console.log(newQty + " min:" + minValue + "max:" + maxValue);
+        if(newQty > maxValue){
+            alert("Malheureusement, il n'y a pas assez de " + nom +".");
+            $(element).val(1);  // On remet l'article a 1
+            $.post('panier.php', { update_qty: true, index: index, new_qty: 1 }, function() {
+                // Mettre à jour la quantité et recalculer le total
+                calculerTotalPanier();
+            });
+        }
+        else if(newQty <= 0){
+            alert("Veuillez rentrer un chiffre valide.");
+            $(element).val(1);  // On remet l'article a 1
+            $.post('panier.php', { update_qty: true, index: index, new_qty: 1 }, function() {
+                // Mettre à jour la quantité et recalculer le total
+                calculerTotalPanier();
+            });
+        }
+        else{
+            // La fonction a Dines pour mettre a jour le panier session : 
+            $.post('panier.php', { update_qty: true, index: index, new_qty: newQty }, function() {
+                // Mettre à jour la quantité et recalculer le total
+                calculerTotalPanier();
+            });
+        }
+    }
 
         $(document).ready(function() {
+            // Mettre à jour le total lors du chargement de la page
+            calculerTotalPanier();
     // Gestionnaire d'événements pour le bouton "Appliquer le code"
     $('#apply-code-btn').click(function(e) {
         e.preventDefault(); // Empêche l'envoi du formulaire
@@ -167,18 +176,26 @@ if (isset($_POST['code_promo'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($_SESSION['panier'] as $index => $produit): ?>
+                    <?php 
+                    foreach ($_SESSION['panier'] as $index => $produit): 
+                        // Recupération de la quantité max de chaque pokemon
+                        $sql = "SELECT quantité FROM pokedex WHERE id = :id";
+                        $stmt = $bdd->prepare($sql);
+                        $stmt->bindParam(':id', $produit->pokemon_id, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $quantiteMax = $stmt->fetchColumn();
+                    ?>
                     <tr>
                         <td><?php echo $produit->pokemon_id; ?></td>
                         <td><?php echo $produit->nom; ?></td>
                         <td><?php echo $produit->prixApresRemise; ?></td>
                         <td>
                             <form class="qtyForm" data-index="<?php echo $index; ?>">
-                                <input type="number" name="new_qty" value="<?php echo $produit->quantite; ?>" min="1">
-                                <input type="submit" name="update_qty" value="Mettre à jour">
+                                <input data-nom="<?php echo $produit->nom; ?>" data-index="<?php echo $index; ?>" data-idpok=<?php echo $produit->pokemon_id; ?> onchange="majPanier(this)" type="number" name="new_qty" value="<?php echo $produit->quantite; ?>" min=1 max=<?php echo $quantiteMax;?>>
+                                <!-- <input type="submit" name="update_qty" value="Mettre à jour"> -->
                             </form>
                         </td>
-                        <td class="totalProduit"><?php echo $produit->prix * $produit->quantite; ?></td>
+                        <td class="totalProduit"><?php echo intval($produit->prix) * intval($produit->quantite); ?></td>
                         <td>
                             <form action="panier.php" method="GET">
                                 <input type="hidden" name="supprimer" value="<?php echo $index; ?>">
