@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             echo "Commande enregistrée avec succès!";
         } else {
-            echo "Erreur : " . $stmt->error;
+            echo "Erreur : " . $bdd->errorInfo();
         }
 
 
@@ -50,38 +50,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Fermer le statement
         $stmt=null;
 
-
-
-        // Préparer la requête SQL pour insérer les détails de la commande
-        $query = "INSERT INTO ligne_commandes (id_commande, id_pokemon, quantite) VALUES (?, ?, ?)";
-        $stmt = $bdd->prepare($query);
-    
+        $pokemon = array();
         // Parcourir chaque article du panier pour enregistrer les détails
         foreach ($_SESSION['panier'] as $key=>$produit) {
-            $idPokemon = $produit->pokemon_id;
-            $quantite = $produit->quantite;
-    
-            // Lier les variables et exécuter la requête
-            $stmt->bindValue(1, $numeroCommande, PDO::PARAM_STR);
-            $stmt->bindValue(2, $idPokemon, PDO::PARAM_INT);
-            $stmt->bindValue(3, $quantite, PDO::PARAM_INT);
-            $stmt->execute();
+            $pokemon[intval($produit->pokemon_id)] = intval($produit->quantite);
         }
+        // Convertir le tableau associatif en JSON
+        $jsonString = json_encode($pokemon);
+
+        // Préparer la requête SQL pour insérer les détails de la commande
+        $query = "INSERT INTO ligne_commandes (id_commande, pokemon) VALUES (?, ?)";
+        $stmt = $bdd->prepare($query);
+        // Lier les variables et exécuter la requête
+        $stmt->bindValue(1, $numeroCommande, PDO::PARAM_STR);
+        $stmt->bindValue(2, $jsonString, PDO::PARAM_STR);
+        $stmt->execute();
     
         // Vérifier si les insertions ont réussi
         if ($stmt->rowCount() > 0) {
             echo "Détails de la commande enregistrés avec succès!";
         } else {
-            echo "Erreur : " . $stmt->errorInfo()[2];
+            echo "Erreur : " . $stmt->errorInfo();
         }
-    
+        
         // Nettoyer le statement
         $stmt = null;
-    
+        
+        // Réduit le nombre de pokemon dans la bdd
+        foreach($pokemon as $cle => $val){  
+            $sql = "UPDATE pokedex SET quantité = quantité - :reduction WHERE id = :id";
+            $stmt = $bdd->prepare($sql);
+            // Lier les variables et exécuter la requête
+            $quantite = intval($val);
+            $idPok = intval($cle);
+            $stmt->bindParam(":reduction", $quantite, PDO::PARAM_INT);
+            $stmt->bindParam(":id", $idPok, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+        // Vérifier si les modif sont reussi
+        if ($stmt->rowCount() > 0) {
+            echo "Modification du nombre de pokemon dans la bdd avec succes!";
+        } else {
+            echo "Erreur : " . $stmt->errorInfo();
+        }
         // Fermer la connexion
         $pdo = null;
     } else {
-        echo "Erreur : " . $bdd->error;
+        echo "Erreur : " . $bdd->errorInfo();
     }
 
     // Fermer la connexion

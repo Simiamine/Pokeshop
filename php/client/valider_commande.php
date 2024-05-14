@@ -5,16 +5,17 @@ function convertirEuroEnNombre($montant) {
 
     return $montantNettoye;
 }
+
 session_start();
 $_SESSION['finalPrice'] = 0;
 if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])){
     foreach ($_SESSION['panier'] as $key=>$produit) {
         $result = convertirEuroEnNombre($produit->prixApresRemise) * $produit->quantite;
         $_SESSION['finalPrice'] += $result;
-        echo $result;
+        //echo $result;
         
     }
-    echo $_SESSION['finalPrice'];
+    //echo $_SESSION['finalPrice'];
     
 } 
 

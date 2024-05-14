@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../css/login.css">
     <link rel="icon" type="image/png" href="../img/icon.png"/>
 </head>
-<?php include_once('../include/header.php'); ?>
+<?php session_start();
+include_once('../include/header.php'); ?>
 <script>
     $("#connexion").addClass("active");  // Fonction pour mettre la class "active" en fonction de la page
 </script>

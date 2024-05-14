@@ -46,6 +46,10 @@ if (isset($_POST['code_promo'])) {
     if ($code_promo == '259325') {
         $total_reduit = $total * 0.8; // Réduction de 20%
     }
+    // Vérifier si le code promo est valide
+    if ($code_promo == 'MemePasUnPeu?') {
+        $total_reduit = $total * 0.75; // Réduction de 25%
+    }
 }
 
 
@@ -76,6 +80,7 @@ if (isset($_POST['code_promo'])) {
     $("#panier").addClass("active");  // Fonction pour mettre la class "active" en fonction de la page
 </script>
 <script>
+    var compteur = 0;
         function calculerTotalPanier() {
         let total = 0;
         $('#panierTable tbody tr').each(function() {
@@ -126,35 +131,35 @@ if (isset($_POST['code_promo'])) {
         }
     }
 
-    $(document).ready(function() {
-    // Mettre à jour le total lors du chargement de la page
-    calculerTotalPanier();
-
-    var compteur = 0; // Initialiser le compteur en dehors de la fonction de clic
-
+        $(document).ready(function() {
+            // Mettre à jour le total lors du chargement de la page
+            calculerTotalPanier();
+    // Gestionnaire d'événements pour le bouton "Appliquer le code"
     $('#apply-code-btn').click(function(e) {
         e.preventDefault(); // Empêche l'envoi du formulaire
 
         // Récupérer la valeur du code promo saisi par l'utilisateur
         var promoCode = $('#code_promo').val();
 
-        if (compteur >= 1) {
-            alert('Vous pouvez utiliser ce code une seule fois');
-        } else {
-            if (promoCode === 'MemePasUnPeu?') {
+        // Vérifier si le code promo est valide
+        if (promoCode === '259325' || promoCode === "MemePasUnPeu?") {
+            if(compteur == 0){
                 // Appliquer une réduction de 20% sur le total
                 var total = parseFloat($('.totalGlobal').text());
                 var reducedTotal = total * 0.8;
                 $('.totalGlobal').text(reducedTotal.toFixed(2));
-                compteur++; // Incrémenter le compteur après l'application du code
                 alert('Code promo appliqué !');
-            } else {
-                alert('Code promo invalide.');
+                compteur++;
             }
+            else{
+                alert("Vous avez déjà appliqué un code");
+            }
+            
+        } else {
+            alert('Code promo invalide.');
         }
     });
 });
-
     </script>
 <body>
     <div class="container">
@@ -259,11 +264,11 @@ if (isset($_POST['code_promo'])) {
         <label for="code_promo">Code de promotion :</label>
         <input type="text" id="code_promo" name="code_promo">
     </div>
-    <button type="submit"  id="apply-code-btn" style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
+    <button type="submit"  id="apply-code-btn" +style="background-color: blue;" class="btn btn-primary">Appliquer le code</button>
 </form>
 </div>
 
-<div class="commande-form" style="margin-left: 40%; margin-right: 25%; margin-top: 20px;">
+<div class="commande-form" style="margin-left: 25%; margin-right: 25%; margin-top: 20px;">
     <a href="client/valider_commande.php" class="btn-submit" style="background-color: #52f436; color: black; border: none; padding: 15px 30px; text-align: center; text-decoration: none; font-size: 14px; cursor: pointer; border-radius: 5px; display: inline-block;">Valider ma commande</a>
 </div>
 

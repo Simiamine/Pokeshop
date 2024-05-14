@@ -3,7 +3,7 @@
     require  '../include/databaseconnect.php'
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     
@@ -45,20 +45,43 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 
 // Requête SQL avec jointures pour obtenir les commandes de l'utilisateur connecté, les noms et types des Pokémon
-$requete = $bdd->prepare("
-    SELECT lc.id, lc.id_commande, lc.id_pokemon, p.nom as nom_pokemon, p.type_1, p.type_2, p.generation, p.légendaire, p.prix, p.discount, p.image, p.description
-    FROM ligne_commandes lc
-    JOIN commandes c ON lc.id_commande = c.id
-    JOIN pokedex p ON lc.id_pokemon = p.id
-    WHERE c.id_utilisateur = :userId
-");
+// $requete = $bdd->prepare("
+//     SELECT lc.id, lc.id_commande, lc.pokemon, p.nom as nom_pokemon, p.type_1, p.type_2, p.generation, p.légendaire, p.prix, p.discount, p.image, p.description
+//     FROM ligne_commandes lc
+//     JOIN commandes c ON lc.id_commande = c.id
+//     JOIN pokedex p ON lc.id_pokemon = p.id
+//     WHERE c.id_utilisateur = :userId
+// ");
 
+$sql = "SELECT lc.pokemon
+        FROM ligne_commandes lc
+        JOIN commandes c ON lc.id_commande = numero_commande
+        WHERE c.id_utilisateur = :userId"; 
+$requete = $bdd -> prepare($sql);
 $requete->bindParam(':userId', $userId, PDO::PARAM_INT);
 $requete->execute();
-
-// Parcourir chaque ligne retournée par la requête
+$pokedex = array();  // Liste vide qui va contenir les id des pokemons
 while ($ligne_commandes = $requete->fetch(PDO::FETCH_ASSOC)) {
-    // Affichage des détails de chaque commande pour l'utilisateur connecté dans une seule div
+    $pokemon = json_decode($ligne_commandes['pokemon'], true);
+    // Vérifier que la conversion a réussi
+    if (json_last_error() === JSON_ERROR_NONE) {
+        foreach($pokemon as $cle => $val){
+            $pokedex[] = $cle;
+        }
+    }
+    else{
+        echo "ERREUR DE CONVERSION JSON";
+    }
+}
+$pokedex = array_unique($pokedex);  // Enleve les doublons des id de pokemon
+foreach($pokedex as $idPok){
+    $sql = "SELECT p.nom as nom_pokemon, p.type_1, p.type_2, p.generation, p.légendaire, p.prix, p.discount, p.image, p.description
+            FROM pokedex p WHERE p.id = :idPok";
+    $requete = $bdd -> prepare($sql);
+    $requete->bindParam(':idPok', $idPok, PDO::PARAM_INT);
+    $requete->execute();
+    // Récupérer le résultat
+    $ligne_commandes = $requete->fetch(PDO::FETCH_ASSOC);
     echo '<div class="card">' .
          '<div class="card-img-top-container">' .
          '<img src="' . $ligne_commandes['image'] . '" alt="Image de ' . htmlspecialchars($ligne_commandes['nom_pokemon'], ENT_QUOTES) . '" class="card-img-top">' .
@@ -70,11 +93,30 @@ while ($ligne_commandes = $requete->fetch(PDO::FETCH_ASSOC)) {
          (empty($ligne_commandes['type_2']) ? '' : ', <strong>Type secondaire:</strong> ' . htmlspecialchars($ligne_commandes['type_2'], ENT_QUOTES)) .
          '<br><strong>Génération:</strong> ' . htmlspecialchars($ligne_commandes['generation'], ENT_QUOTES) .
          '<br><strong>Légendaire:</strong> ' . ($ligne_commandes['légendaire'] ? 'Oui' : 'Non') .
-         '<br><strong>Description:</strong> ' . htmlspecialchars($ligne_commandes['description'], ENT_QUOTES) .
+         '<br><strong>Description:</strong> ' . $ligne_commandes['description'] .  // J'ai enlevé htmlspecialchars() car ca enlevait les caractères spéciaux
          '</p>' .
          '</div>' .
          '</div>';
 }
+// Parcourir chaque ligne retournée par la requête
+// while ($ligne_commandes = $requete->fetch(PDO::FETCH_ASSOC)) {
+//     // Affichage des détails de chaque commande pour l'utilisateur connecté dans une seule div
+//     echo '<div class="card">' .
+//          '<div class="card-img-top-container">' .
+//          '<img src="' . $ligne_commandes['image'] . '" alt="Image de ' . htmlspecialchars($ligne_commandes['nom_pokemon'], ENT_QUOTES) . '" class="card-img-top">' .
+//          '</div>' .
+//          '<div class="card-body">' .
+//          '<h5 class="card-title">' . htmlspecialchars($ligne_commandes['nom_pokemon'], ENT_QUOTES) . '</h5>' .
+//          '<p class="card-text">' .
+//          '<strong>Type principal:</strong> ' . htmlspecialchars($ligne_commandes['type_1'], ENT_QUOTES) .
+//          (empty($ligne_commandes['type_2']) ? '' : ', <strong>Type secondaire:</strong> ' . htmlspecialchars($ligne_commandes['type_2'], ENT_QUOTES)) .
+//          '<br><strong>Génération:</strong> ' . htmlspecialchars($ligne_commandes['generation'], ENT_QUOTES) .
+//          '<br><strong>Légendaire:</strong> ' . ($ligne_commandes['légendaire'] ? 'Oui' : 'Non') .
+//          '<br><strong>Description:</strong> ' . htmlspecialchars($ligne_commandes['description'], ENT_QUOTES) .
+//          '</p>' .
+//          '</div>' .
+//          '</div>';
+// }
 ?>
 </body>
 <style>

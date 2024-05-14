@@ -30,7 +30,7 @@
     <section id="hero">
         <h2>Achetez votre propre</h2>
         <h1>Pokémon !</h1>
-        <button>Achetez dès maintenant !</button>
+        <button id="boutonAchete" onclick="location.href='php/catalogue.php';">Achetez dès maintenant !</button>
     </section>
 
       </div>
