@@ -61,7 +61,7 @@
                 // Si la requête retourne des résultats, affichez-les
                 if ($requete->rowCount() > 0) {
                     echo "<table class='table table-striped table-hover'>";
-                    echo "<thead><tr><th>Numéro commande</th><th>Adresse de livraison </th><th>Ville</th><th>Code Postal </th><th>Total</th><th>Date</th><th>Livraison</th></tr></thead><tbody>";
+                    echo "<thead><tr><th>Numéro commande</th><th>Adresse de livraison </th><th>Ville</th><th>Code Postal </th><th>Total</th><th>Date</th><th>Opération</th></tr></thead><tbody>";
                     while ($commande = $requete->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($commande['numero_commande']) . "</td>";
@@ -70,7 +70,9 @@
                         echo "<td>" . htmlspecialchars($commande['code_postal']) . "</td>";
                         echo "<td>" . htmlspecialchars($commande['total']) . "</td>";
                         echo "<td>" . htmlspecialchars($commande['date_creation']) . "</td>";
-                        echo "<td>" . htmlspecialchars($commande['livraison']) . "</td>";
+                        echo "<td><a class='btn btn-primary btn-sm' href='facture.php?id=" . htmlspecialchars($commande['id']) . "'>Afficher facture</a></td>";
+                                    
+                        
                         echo "</tr>";
                     }
                     echo "</tbody></table>";
