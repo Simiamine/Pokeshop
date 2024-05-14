@@ -76,21 +76,7 @@ foreach ($requete as $pokemon) {
         case 'electrique':
             $bg_color = "#f5d33c";
             break;
-        case 'psy':
-            $bg_color = "#fb7178";
-            break;
-        case 'glace':
-            $bg_color = "#72cfc0";
-            break;
-        case 'dragon':
-            $bg_color = "#0a6dc2";
-            break;
-        case 'tenebre':
-            $bg_color = "#5a5564";
-            break;
-        case 'fee':
-            $bg_color = "#ec8ee7";
-            break;
+
         default: 
             echo "";
             break;

@@ -45,7 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Erreur : " . $bdd->errorInfo();
         }
 
-
+        // Récupérer l'ID de la commande insérée
+        $idCommande = $bdd->lastInsertId();
 
         // Fermer le statement
         $stmt=null;
@@ -62,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO ligne_commandes (id_commande, pokemon) VALUES (?, ?)";
         $stmt = $bdd->prepare($query);
         // Lier les variables et exécuter la requête
-        $stmt->bindValue(1, $numeroCommande, PDO::PARAM_STR);
+        $stmt->bindValue(1, $idCommande, PDO::PARAM_STR);
         $stmt->bindValue(2, $jsonString, PDO::PARAM_STR);
         $stmt->execute();
     
