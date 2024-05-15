@@ -178,7 +178,7 @@ function inscript(){  // Fonction inscription
                     $('#mdp2').addClass('input_erreur');
                     break;
                   default:
-                    break;; 
+                    break;
                 }
               }
             });
@@ -224,7 +224,6 @@ function inscript(){  // Fonction inscription
                 $('#mdp1').addClass('input_erreur');
                 error = -4;
               }
-              
               // erreur mdp different
               if(response['mdp'] == -3){
                 $("#rep_inscription").append("Les mots de passe sont différents");
@@ -233,18 +232,50 @@ function inscript(){  // Fonction inscription
                 $('#mdp2').addClass('input_erreur');
                 error = -3;
               }
-              
+              if(response['mdp'] == -4){
+                $("#rep_inscription").append("Veuillez inscrire un mot de passe");
+                $("#rep_inscription").addClass("alert-rouge");
+                $('#mdp1').addClass('input_erreur');
+                error = -4;
+              }
+              if(response['mdp'] == -5){  // - 7 caractères
+                $("#rep_inscription").append("Le mot de passe est trop court");
+                $("#rep_inscription").addClass("alert-rouge");
+                $('#mdp1').addClass('input_erreur');
+                error = -5;
+              }
+              if(response['mdp'] == -6){  // Pas de chiffre
+                $("#rep_inscription").append("Le mot de passe doit contenir 1 chiffre");
+                $("#rep_inscription").addClass("alert-rouge");
+                $('#mdp1').addClass('input_erreur');
+                error = -6;
+              }
+              if(response['mdp'] == -7){  // Pas de maj
+                $("#rep_inscription").append("Le mot de passe doit contenir une majuscule");
+                $("#rep_inscription").addClass("alert-rouge");
+                $('#mdp1').addClass('input_erreur');
+                error = -7;
+              }
+              if(response['mdp'] == -8){  // Pas de minuscule
+                $("#rep_inscription").append("Le mot de passe doit contenir une majuscule");
+                $("#rep_inscription").addClass("alert-rouge");
+                $('#mdp1').addClass('input_erreur');
+                error = -8;
+              }
+              if(response['mdp'] == -9){
+                $("#rep_inscription").append("Le mot de passe doit contenir un caractère spécial");
+                $("#rep_inscription").addClass("alert-rouge");
+                $('#mdp1').addClass('input_erreur');
+                error = -9;
+              }
               // Erreur mail deja existant
               if(response['email'] == -10){
                 $("#rep_inscription").append("Il existe déjà un compte avec cet email");
                 $("#rep_inscription").addClass("alert-orange");
                 $('#email').addClass('input_erreur');
                 error = -10;
-              }
-              
-              // S'il y a aucune erreur
-              
-            }
+              }    
+            }// S'il y a aucune erreur
             if(error == -999){
               $("#rep_inscription").html("Bienvenue parmi nous dresseur Pokemon !");
               $("#rep_inscription").addClass("alert-vert");

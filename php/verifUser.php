@@ -53,6 +53,21 @@ function test(string $prenom, string $nom, string $email, string $tel, string $d
         $erreur["email"] = 0;
     }
     // Sécurité du mot de passe 
+    if (!preg_match("/\d/", $mdp1)) {
+        $erreur["mdp"] = -6;  // Le mot de passe doit contenir un chiffre
+    }
+    if (!preg_match("/[A-Z]/", $mdp1)) {
+        $erreur["mdp"] = -7;  // Le mot de passe doit contenir une majuscule
+    }
+    if (!preg_match("/[a-z]/", $mdp1)) {
+        $erreur["mdp"] = -8;  // Le mot de passe doit contenir une minuscule
+    }
+    if (!preg_match("/\W/", $mdp1)) {
+        $erreur["mdp"] = -9;  // Le mot de passe doit contenir un caractere speciale
+    } 
+    if(strlen($mdp1) <= 7){
+        $erreur["mdp"] = -5;  // Le mot de passe fait moins de 7 caractères
+    }
     if ($mdp1 !== $mdp2) {  // Les mdp ne correspondent pas
         $erreur["mdp"] = -3;  // les mdp sont differents
     }
@@ -62,35 +77,9 @@ function test(string $prenom, string $nom, string $email, string $tel, string $d
     if($mdp2 === ""){
         $erreur["mdp"] = -2;  // il faut que l'utilisateur verifie son mdp
     }
-    
     if ($mdp1 === "" && $mdp2 === "") {
         $erreur["mdp"] = 0;  // il faut que l'utilisateur mette les mots de passe
     }
-  
-    
-    
-    /* Securisation du mot de passe
-    if(strlen($mdp1) <= 7){
-      echo '<div id="alert"> Pour plus de sécurité, <br> le mot de passe doit contenir au moins 8 caractères </div>';
-      return 0;
-    }
-    if (!preg_match("/\d/", $mdp1)) {
-      echo '<div id="alert"> Pour plus de sécurité, <br> le mot de passe doit contenir au moins 1 chiffre </div>';
-      return 0;
-    }
-    if (!preg_match("/[A-Z]/", $mdp1)) {
-      echo '<div id="alert"> Pour plus de sécurité, <br> le mot de passe doit contenir au moins 1 lettre majuscule </div>';
-      return 0;
-    }
-    if (!preg_match("/[a-z]/", $mdp1)) {
-      echo '<div id="alert"> Pour plus de sécurité, <br> le mot de passe doit contenir au moins 1 lettre minuscule </div>';
-      return 0;
-    }
-    if (!preg_match("/\W/", $mdp1)) {
-      echo '<div id="alert"> Pour plus de sécurité, <br> le mot de passe doit contenir au moins 1 caractère spécial </div>';
-      return 0;
-    } */
-  
     return $erreur;
 }
 function testco(string $email, string $mdp, array $erreur){
