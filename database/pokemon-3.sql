@@ -107,6 +107,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `dateNaissance` varchar(100) NOT NULL,
   `mdp` text NOT NULL,
   `statut` varchar(100) NOT NULL DEFAULT 'client',
+  `nb_points` int NOT NULL DEFAULT 0,
+  `abonnement` boolean DEFAULT FALSE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 
