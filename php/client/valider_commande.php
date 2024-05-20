@@ -19,8 +19,6 @@ if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])){
     
 } 
 
-
-
 // Initialiser le panier s'il n'existe pas encore
 if (!isset($_SESSION['panier'])) {
     $_SESSION['panier'] = array();

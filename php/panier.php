@@ -32,55 +32,25 @@ $total = 0;
 foreach ($_SESSION['panier'] as $produit) {
     if (is_numeric($produit->prix) && is_numeric($produit->quantite)) {
         $total += $produit->prix * $produit->quantite;
-        echo $total;
     }
 }
 
 // Initialiser le total réduit
 $total_reduit = $total;
-echo $total_reduit;
 
-
-$sql = "SELECT nb_points FROM utilisateur WHERE id = :id";
-$stmt = $bdd->prepare($sql);
-$stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-$stmt->execute();
-$nb_points = $stmt->fetchColumn();
-
-
-$user_id = $_SESSION["user_id"];
-$sql = "SELECT abonnement FROM utilisateur WHERE id = :id";
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    // Récupérer le résultat
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $abonnement  = $result['abonnement'];
-    echo $abonnement;
-
-
-
+/// Vérifier si le formulaire de code promo a été soumis
 if (isset($_POST['code_promo'])) {
     $code_promo = $_POST['code_promo'];
 
     // Vérifier si le code promo est valide
     if ($code_promo == '259325') {
-        $total_reduit = $total * 0.8;// Réduction de 20%
+        $total_reduit = $total * 0.8; // Réduction de 20%
     }
     // Vérifier si le code promo est valide
     if ($code_promo == 'MemePasUnPeu?') {
-        $total_reduit = $total * 0.75;// Réduction de 25%
+        $total_reduit = $total * 0.75; // Réduction de 25%
     }
 }
-
-
-if ($abonnement){
-    $total_reduit = $total * 0.8;
-    echo $total;
-}
-
-
 
 
 
@@ -111,28 +81,21 @@ if ($abonnement){
 </script>
 <script>
     var compteur = 0;
-    const abonnement = <?php echo json_encode($abonnement); ?>;
-        
-        // Fonction de calcul du total du panier
         function calculerTotalPanier() {
-            let total = 0;
-            $('#panierTable tbody tr').each(function() {
-                let prixUnitaire = parseFloat($(this).find('td:nth-child(3)').text());
-                let quantiteInput = $(this).find('input[name="new_qty"]');
-                let quantite = parseInt(quantiteInput.val());
-                if (!isNaN(quantite) && quantite > 0) {
-                    let totalProduit = prixUnitaire * quantite;
-                    // Appliquer la réduction de 20% si abonnement est true
-                    if (abonnement) {
-                        totalProduit *= 0.8;
-                    }
-                    $(this).find('.totalProduit').text(totalProduit.toFixed(2));
-                    total += totalProduit;
-                }
-            });
-            // Mettre à jour la cellule de total global
-            $('.totalGlobal').text(total.toFixed(2));
-        }
+        let total = 0;
+        $('#panierTable tbody tr').each(function() {
+            let prixUnitaire = parseFloat($(this).find('td:nth-child(3)').text());
+            let quantiteInput = $(this).find('input[name="new_qty"]');
+            let quantite = parseInt(quantiteInput.val());
+            if (!isNaN(quantite) && quantite > 0) {
+                let totalProduit = prixUnitaire * quantite;
+                $(this).find('.totalProduit').text(totalProduit.toFixed(2));
+                total += totalProduit;
+            }
+        });
+        // Mettre à jour la cellule de total global
+        $('.totalGlobal').text(total.toFixed(2));
+    }
 
     // Fonction pour mettre a jour le panier et tout...
     function majPanier(element){

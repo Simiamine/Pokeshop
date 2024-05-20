@@ -97,7 +97,7 @@
 
 <div class="program-title">Le programme de fidélité Pokeshop à seulement 9.99 €/an</div>
 <div class="program-description">
-    <p>Rejoignez dès maintenant le programme de fidélité Pokeshop et commencez à cumuler des points à chaque commande pour bénéficier d'avantages exclusifs comme une réduction de 20% sur toutes vos commandes !</p>
+    <p>Rejoignez dès maintenant le programme de fidélité Pokeshop et commencez à cumuler des points à chaque commande pour bénéficier d'avantages exclusifs.</p>
     <p>En devenant membre de notre programme de fidélité, vous accédez à une multitude d'avantages. Vous profiterez de réductions attractives, d'offres spéciales, mais aussi d'invitations à des événements exclusifs et à des avant-premières de nouvelles sorties. </p>
     <br><p><em>Que votre quête soit de trouver le Pokémon légendaire de vos rêves ou de compléter votre collection par génération, notre vaste sélection est là pour satisfaire chaque besoin.</em></p>
 
@@ -144,9 +144,7 @@
 </div>
 
 <div class="button-container">
-  <form action="adhesion.php" method="post">
-    <button type="submit" class="btn">Adhérer à l'abonnement</button>
-  </form>
+  <button class="button" >J'adhère au programme</button>
 </div>
 
 <br><br><br>
