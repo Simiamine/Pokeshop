@@ -4,3 +4,5 @@ Avec - Sara FELGINES
      - Dines NAGULANATHAN
      - Amine M'ZALI
      - Meven THOMAS
+     
+Les détails sont inscrits dans le rapport de projet rendu à CY Tech.
