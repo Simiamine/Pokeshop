@@ -176,5 +176,5 @@
         </div>
     </div>
 </body>
-<?php include_once('include/footer.php'); ?>
+<?php include_once('../include/footer.php'); ?>
 </html>
